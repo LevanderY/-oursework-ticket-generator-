@@ -1,10 +1,22 @@
 import React from 'react'
-import 'antd/dist/antd.css'
+import { Col, Row } from 'antd'
+import { SideBar } from '../SideBar'
+import { Header } from '../Header'
+
 import './reset.css'
-import NavigationBar from '../NavigationBar/NavigationBar'
+import 'antd/dist/antd.css'
 
 const Root: React.FC = () => {
-    return <NavigationBar />
+    return (
+        <Row>
+            <Col span={3}>
+                <SideBar />
+            </Col>
+            <Col span={21}>
+                <Header />
+            </Col>
+        </Row>
+    )
 }
 
-export default Root
+export { Root }
