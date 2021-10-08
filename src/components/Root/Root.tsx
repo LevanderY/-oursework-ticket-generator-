@@ -2,6 +2,7 @@ import React from 'react'
 import { Col, Row } from 'antd'
 import { SideBar } from '../SideBar'
 import { Header } from '../Header'
+import { SignInForm } from '../SignInForm'
 import { SignUpForm } from '../SignUpForm'
 
 import './reset.css'
@@ -16,7 +17,7 @@ const Root: React.FC = () => {
             <Col span={21}>
                 <Header />
                 <div className='container'>
-                    <SignUpForm />
+                    <SignInForm />
                 </div>
             </Col>
         </Row>

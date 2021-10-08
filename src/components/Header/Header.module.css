@@ -1,0 +1,12 @@
+.header {
+  padding: 0 24px !important;
+  background: #001529 !important;
+}
+.header .title {
+  color: rgba(255, 255, 255, 0.65) !important;
+}
+.header .subtitle {
+  color: rgba(225, 225, 225, 0.65) !important;
+}
+
+/*# sourceMappingURL=Header.module.css.map */

@@ -1,25 +1,23 @@
 import React from 'react'
 import * as yup from 'yup'
 import { Button, message } from 'antd'
-import { Field, Form, Formik, FormikHelpers } from 'formik'
-import { auth } from '../../firebase'
+import { Field, Form, Formik } from 'formik'
 import { TextField } from '../index'
+import { auth } from '../../firebase'
 import classNames from 'classnames/bind'
-import styles from './SignUpForm.module.scss'
+import styles from './SignInForm.module.scss'
 
 const cx = classNames.bind(styles)
 
-interface SignUpIValuesInterface {
+interface SignInIValuesInterface {
     email: string
     password: string
-    confirmPassWord: string
 }
 
-const SignUpForm: React.FC = () => {
-    const initialValues: SignUpIValuesInterface = {
+const SignInForm: React.FC = () => {
+    const initialValues: SignInIValuesInterface = {
         email: '',
         password: '',
-        confirmPassWord: '',
     }
 
     const validationSchema = yup.object().shape({
@@ -29,20 +27,15 @@ const SignUpForm: React.FC = () => {
             .required('Required field')
             .min(6, 'Password is too short - should be 6 chars minimum.')
             .matches(/[a-zA-Z]/, 'Password must contain Latin letters!'),
-        confirmPassWord: yup
-            .string()
-            .oneOf([yup.ref('password'), null], 'Passwords must match')
-            .required('Required field'),
     })
 
-    const onSubmitHandler = async (values: SignUpIValuesInterface, { setErrors }: FormikHelpers<SignUpIValuesInterface>) => {
+    const onSubmitHandler = async (values: SignInIValuesInterface) => {
         try {
             const { email, password } = values
-            await auth.createUserWithEmailAndPassword(email, password)
+            await auth.signInWithEmailAndPassword(email, password)
             message.success('Login successful')
-        } catch (e: unknown | any) {
-            setErrors(e?.response?.data)
-            message.error(`Smt wrong ${e}`)
+        } catch {
+            message.error(`Invalid email or password!`)
         }
     }
 
@@ -51,7 +44,6 @@ const SignUpForm: React.FC = () => {
             <Form autoComplete='off' className={cx('form-container')}>
                 <Field type='email' name='email' label='Email' component={TextField} />
                 <Field type='password' name='password' label='Enter password' component={TextField} />
-                <Field type='password' name='confirmPassWord' label='Confirm password' component={TextField} />
                 <Button htmlType='submit' type='primary'>
                     SignUp
                 </Button>
@@ -60,4 +52,4 @@ const SignUpForm: React.FC = () => {
     )
 }
 
-export { SignUpForm }
+export { SignInForm }
