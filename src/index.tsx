@@ -4,14 +4,15 @@ import './index.scss'
 import reportWebVitals from './reportWebVitals'
 import { Root } from './components'
 import { BrowserRouter as Route } from 'react-router-dom'
-import { AuthProvider } from './utils/authContext'
+import { Provider } from 'react-redux'
+import store from './state/_store/configurateStore'
 
 ReactDOM.render(
     <React.StrictMode>
         <Route>
-            <AuthProvider>
+            <Provider store={store}>
                 <Root />
-            </AuthProvider>
+            </Provider>
         </Route>
     </React.StrictMode>,
     document.getElementById('root')
