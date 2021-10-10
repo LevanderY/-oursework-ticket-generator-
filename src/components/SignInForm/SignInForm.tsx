@@ -1,11 +1,14 @@
 import React from 'react'
 import * as yup from 'yup'
+import { useDispatch } from 'react-redux'
 import { Button, message } from 'antd'
 import { Field, Form, Formik } from 'formik'
 import { TextField } from '../index'
 import { auth } from '../../firebase'
+import { loginAuthAction } from '../../state/auth/authStateSlice'
 import classNames from 'classnames/bind'
 import styles from './SignInForm.module.scss'
+import { useHistory } from 'react-router-dom'
 
 const cx = classNames.bind(styles)
 
@@ -15,6 +18,9 @@ interface SignInIValuesInterface {
 }
 
 const SignInForm: React.FC = () => {
+    const dispatch = useDispatch()
+    const history = useHistory()
+
     const initialValues: SignInIValuesInterface = {
         email: '',
         password: '',
@@ -33,6 +39,9 @@ const SignInForm: React.FC = () => {
         try {
             const { email, password } = values
             await auth.signInWithEmailAndPassword(email, password)
+            const idToken = await auth.currentUser?.getIdToken()
+            dispatch(loginAuthAction({ idToken: idToken }))
+            history.push('/')
             message.success('Login successful')
         } catch {
             message.error(`Invalid email or password!`)
