@@ -1,21 +1,24 @@
 import React from 'react'
-import { Col, Row } from 'antd'
-import { SideBar } from '../SideBar'
-import { Header } from '../Header'
+import { Switch, Route } from 'react-router-dom'
+import { NavigationBar } from '../NavigationBar'
+import { SignInForm } from '../SignInForm'
+import { SignUpForm } from '../SignUpForm'
+import { ProfilePage, TestBankPage } from '../../pages'
+import PrivateRoute from '../../utils/privateRoute'
 
 import './reset.css'
 import 'antd/dist/antd.css'
 
 const Root: React.FC = () => {
     return (
-        <Row>
-            <Col span={3}>
-                <SideBar />
-            </Col>
-            <Col span={21}>
-                <Header />
-            </Col>
-        </Row>
+        <Switch>
+            <Route path={'/signup'} component={SignUpForm} />
+            <Route path={'/login'} component={SignInForm} />
+            <NavigationBar>
+                <PrivateRoute redirectPath={'/login'} path={'/'} component={TestBankPage} />
+                <PrivateRoute redirectPath={'/login'} path={'/profile'} component={ProfilePage} />
+            </NavigationBar>
+        </Switch>
     )
 }
 
