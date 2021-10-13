@@ -3,10 +3,17 @@ import ReactDOM from 'react-dom'
 import './index.scss'
 import reportWebVitals from './reportWebVitals'
 import { Root } from './components'
+import { BrowserRouter as Route } from 'react-router-dom'
+import { Provider } from 'react-redux'
+import store from './state/_store/configurateStore'
 
 ReactDOM.render(
     <React.StrictMode>
-        <Root />
+        <Route>
+            <Provider store={store}>
+                <Root />
+            </Provider>
+        </Route>
     </React.StrictMode>,
     document.getElementById('root')
 )

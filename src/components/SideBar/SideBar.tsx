@@ -1,6 +1,7 @@
 import React from 'react'
-import { HomeOutlined, BankOutlined, BookOutlined } from '@ant-design/icons'
 import { Menu } from 'antd'
+import { Link } from 'react-router-dom'
+import { HomeOutlined, BankOutlined, BookOutlined } from '@ant-design/icons'
 
 const SideBar: React.FC = () => {
     return (
@@ -13,6 +14,9 @@ const SideBar: React.FC = () => {
             </Menu.Item>
             <Menu.Item key='3' icon={<BookOutlined />}>
                 Generated tickets
+            </Menu.Item>
+            <Menu.Item key='4' icon={<BookOutlined />}>
+                <Link to={'/profile'}>Profile</Link>
             </Menu.Item>
         </Menu>
     )
