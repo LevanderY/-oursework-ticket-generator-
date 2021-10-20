@@ -7,7 +7,7 @@ import { loadingListTestsAction, TestsBankInterface } from '../../../state/tests
 import { firestore } from '../../../firebase'
 import { useDispatch } from 'react-redux'
 
-interface TestBanKFormValuesInterface {
+export interface TestBanKFormValuesInterface {
     name: string
     description: string
     testsBank: TestsBankInterface[]
@@ -15,8 +15,7 @@ interface TestBanKFormValuesInterface {
 
 interface Props {
     title: string
-    method?: 'post' | 'put'
-    formValues?: any
+    formValues?: TestBanKFormValuesInterface
     id?: string
     onCloseHandler: () => void
 }
@@ -27,7 +26,7 @@ const initialFromValues: TestBanKFormValuesInterface = {
     testsBank: [],
 }
 
-const TestBankForm: React.FC<Props> = ({ title, formValues, method, id, onCloseHandler }: Props) => {
+const TestBankForm: React.FC<Props> = ({ title, formValues, id, onCloseHandler }: Props) => {
     const dispatch = useDispatch()
     const initialValues: TestBanKFormValuesInterface = formValues ? formValues : initialFromValues
 
