@@ -1,24 +1,20 @@
 import { put, takeLatest, all, call } from 'redux-saga/effects'
 import { loadingListTestsAction, loadingListTestsSuccess, TestBankListInterface } from './testsStateSlice'
 import { rsf } from '../../firebase'
+import { ResponseGenerator } from '../_store/rootSaga'
 
-interface ResponseGenerator {
-    config?: any
-    data?: any
-    headers?: any
-    request?: any
-    status?: number
-    statusText?: string
-    forEach?: any
+interface FirestoreItemSnapshotInterface {
+    data: Function
+    id: string
 }
 
 function* loadingListBankTestSaga() {
     try {
-        const snapshot: ResponseGenerator = yield call(rsf.firestore.getCollection, 'test-bank3')
+        const snapshot: ResponseGenerator = yield call(rsf.firestore.getCollection, 'test-banks')
         let tests: TestBankListInterface[] = []
-        snapshot.forEach((test: any) => {
-            const data = test.data()
-            data.id = test.id
+        snapshot.forEach((test: FirestoreItemSnapshotInterface) => {
+            const data = test.data() as TestBankListInterface
+            data.id = test.id as string
             tests.push(data)
         })
         yield put(loadingListTestsSuccess({ testBankList: tests }))
