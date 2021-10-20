@@ -12,7 +12,7 @@ const TestBankAddButton: React.FC = () => {
                 Create test bank
             </Button>
             <Modal onCancel={onCloseHandler} onOk={onOpenHandler} visible={isVisible} centered footer={null}>
-                <TestBankForm title={'Create test bank'} method={'post'} onCloseHandler={onCloseHandler} />
+                <TestBankForm title={'Create test bank'} onCloseHandler={onCloseHandler} />
             </Modal>
         </>
     )

@@ -1,13 +1,13 @@
 import React from 'react'
 import { Field, Form, Formik, FormikHelpers } from 'formik'
+import { useDispatch } from 'react-redux'
 import { Button, Divider, message } from 'antd'
 import * as yup from 'yup'
 import { TextField } from '../../../components'
 import { loadingListTestsAction, TestsBankInterface } from '../../../state/tests/testsStateSlice'
 import { firestore } from '../../../firebase'
-import { useDispatch } from 'react-redux'
 
-interface TestBanKFormValuesInterface {
+export interface TestBanKFormValuesInterface {
     name: string
     description: string
     testsBank: TestsBankInterface[]
@@ -15,8 +15,7 @@ interface TestBanKFormValuesInterface {
 
 interface Props {
     title: string
-    method?: 'post' | 'put'
-    formValues?: any
+    formValues?: TestBanKFormValuesInterface
     id?: string
     onCloseHandler: () => void
 }
@@ -27,7 +26,7 @@ const initialFromValues: TestBanKFormValuesInterface = {
     testsBank: [],
 }
 
-const TestBankForm: React.FC<Props> = ({ title, formValues, method, id, onCloseHandler }: Props) => {
+const TestBankForm: React.FC<Props> = ({ title, formValues, id, onCloseHandler }: Props) => {
     const dispatch = useDispatch()
     const initialValues: TestBanKFormValuesInterface = formValues ? formValues : initialFromValues
 

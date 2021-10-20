@@ -1,13 +1,10 @@
 import React, { useEffect } from 'react'
-import { Row, Col } from 'antd'
+import { Row, Col, Card } from 'antd'
 import { useDispatch, useSelector } from 'react-redux'
-import { Card } from 'antd'
-import { EditOutlined, EllipsisOutlined } from '@ant-design/icons'
 import LoadingSpin from '../../components/spins/LoadingSpin'
+import { TestBankAddButton, TestBankDeleteButton, TestBankEditButton } from './TestBankEditActions'
 import { loadingListTestsAction, TestBankListInterface } from '../../state/tests/testsStateSlice'
 import { AppStateInterface } from '../../state/_store/createRootReducer'
-import { TestBankAddButton, TestBankDeleteButton } from './TestBankEditActions'
-
 const { Meta } = Card
 
 const TestBankPage: React.FC = () => {
@@ -18,12 +15,6 @@ const TestBankPage: React.FC = () => {
         dispatch(loadingListTestsAction())
     }, [dispatch])
 
-    //const foo = async () => {
-    // update
-    // await firestore.collection('test-bank3').doc(`V55tjAQwEpVKK8u7S3Tj`).set({
-    //     name: 'ddd',
-    // })
-
     return (
         <>
             <TestBankAddButton />
@@ -31,10 +22,13 @@ const TestBankPage: React.FC = () => {
             {isHaveFirstLoading && (
                 <Row>
                     {testBankList.map(({ id, description, name, testsBank }: TestBankListInterface) => (
-                        <Col span={6} key={id} style={{ margin: 16 }}>
+                        <Col span={6} key={id} style={{ margin: 10 }}>
                             <Card
-                                actions={[<EditOutlined key='edit' />, <TestBankDeleteButton key={'delete'} id={id} />, <EllipsisOutlined key='ellipsis' />]}
-                                style={{ width: 300, margin: 16, padding: 15 }}
+                                actions={[
+                                    <TestBankEditButton key={'edit'} id={id} formValues={{ testsBank, name, description }} />,
+                                    <TestBankDeleteButton key={'delete'} id={id} />,
+                                ]}
+                                style={{ width: 300, marginTop: 16 }}
                                 loading={isTestBankLoading}
                             >
                                 <Meta title={name} description={description} />
