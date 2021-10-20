@@ -1,30 +1,48 @@
 import React from 'react'
 import { Field, Form, Formik, FormikHelpers } from 'formik'
-import { Button, Divider } from 'antd'
+import { Button, Divider, message } from 'antd'
 import * as yup from 'yup'
 import { TextField } from '../../../components'
+import { loadingListTestsAction, TestsBankInterface } from '../../../state/tests/testsStateSlice'
+import { firestore } from '../../../firebase'
+import { useDispatch } from 'react-redux'
 
 interface TestBanKFormValuesInterface {
     name: string
     description: string
+    testsBank: TestsBankInterface[]
 }
 
 interface Props {
     title: string
+    method?: 'post' | 'put'
+    formValues?: any
+    id?: string
+    onCloseHandler: () => void
 }
 
-const TestBankForm: React.FC<Props> = ({ title }: Props) => {
-    const initialValues: TestBanKFormValuesInterface = {
-        name: '',
-        description: '',
-    }
+const initialFromValues: TestBanKFormValuesInterface = {
+    name: '',
+    description: '',
+    testsBank: [],
+}
+
+const TestBankForm: React.FC<Props> = ({ title, formValues, method, id, onCloseHandler }: Props) => {
+    const dispatch = useDispatch()
+    const initialValues: TestBanKFormValuesInterface = formValues ? formValues : initialFromValues
+
+    const responseMethod = (id: string | undefined, values: TestBanKFormValuesInterface) =>
+        id ? firestore.collection('test-banks').doc(id).set(values) : firestore.collection('test-banks').add(values)
 
     const onSubmitHandler = async (values: TestBanKFormValuesInterface, { setErrors }: FormikHelpers<TestBanKFormValuesInterface>) => {
-        const { name, description } = values
         try {
-            console.log(`${name} ${description}`)
+            await responseMethod(id, values)
+            onCloseHandler()
+            dispatch(loadingListTestsAction())
+            message.success('Test bank has been edited!')
         } catch (e: unknown | any) {
             setErrors(e?.response?.data)
+            message.error(`Opps, ${e?.response?.data}`)
         }
     }
 
@@ -40,7 +58,7 @@ const TestBankForm: React.FC<Props> = ({ title }: Props) => {
                 <Field type='name' name='name' label='Name' component={TextField} />
                 <Field type='description' name='description' label='Description' component={TextField} />
                 <Button htmlType='submit' type='primary'>
-                    SignUp
+                    {title}
                 </Button>
             </Form>
         </Formik>

@@ -6,6 +6,7 @@ import { EditOutlined, EllipsisOutlined } from '@ant-design/icons'
 import LoadingSpin from '../../components/spins/LoadingSpin'
 import { loadingListTestsAction, TestBankListInterface } from '../../state/tests/testsStateSlice'
 import { AppStateInterface } from '../../state/_store/createRootReducer'
+import { TestBankAddButton, TestBankDeleteButton } from './TestBankEditActions'
 
 const { Meta } = Card
 
@@ -22,19 +23,17 @@ const TestBankPage: React.FC = () => {
     // await firestore.collection('test-bank3').doc(`V55tjAQwEpVKK8u7S3Tj`).set({
     //     name: 'ddd',
     // })
-    //delete
-    // await firestore.collection('test-bank3').doc('V55tjAQwEpVKK8u7S3Tj').delete()
-    // }
 
     return (
         <>
+            <TestBankAddButton />
             {<LoadingSpin isLoading={isTestBankLoading} top={150} isHaveFirstLoading={isHaveFirstLoading} />}
             {isHaveFirstLoading && (
                 <Row>
                     {testBankList.map(({ id, description, name, testsBank }: TestBankListInterface) => (
                         <Col span={6} key={id} style={{ margin: 16 }}>
                             <Card
-                                actions={[<EditOutlined key='edit' />, <EllipsisOutlined key='ellipsis' />]}
+                                actions={[<EditOutlined key='edit' />, <TestBankDeleteButton key={'delete'} id={id} />, <EllipsisOutlined key='ellipsis' />]}
                                 style={{ width: 300, margin: 16, padding: 15 }}
                                 loading={isTestBankLoading}
                             >
