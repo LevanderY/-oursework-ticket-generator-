@@ -41,7 +41,7 @@ const SignInForm: React.FC = () => {
             await auth.signInWithEmailAndPassword(email, password)
             const idToken = await auth.currentUser?.getIdToken()
             dispatch(loginAuthAction({ idToken: idToken }))
-            history.push('/')
+            history.push('/tests-bank')
             message.success('Login successful')
         } catch {
             message.error(`Invalid email or password!`)
