@@ -1,10 +1,8 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Field, Form, Formik, FormikHelpers } from 'formik'
 import { Button, Divider } from 'antd'
 import * as yup from 'yup'
 import { TextField } from '../../../components'
-import { useCollectionData } from 'react-firebase-hooks/firestore'
-import { fireStore } from '../../../firebase'
 
 interface TestBanKFormValuesInterface {
     name: string
@@ -20,12 +18,6 @@ const TestBankForm: React.FC<Props> = ({ title }: Props) => {
         name: '',
         description: '',
     }
-    //@ts-ignore
-    const [data] = useCollectionData(fireStore.collection('user'))
-
-    useEffect(() => {
-        console.log(data)
-    }, [data])
 
     const onSubmitHandler = async (values: TestBanKFormValuesInterface, { setErrors }: FormikHelpers<TestBanKFormValuesInterface>) => {
         const { name, description } = values

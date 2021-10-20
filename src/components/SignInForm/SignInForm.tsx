@@ -6,9 +6,9 @@ import { Field, Form, Formik } from 'formik'
 import { TextField } from '../index'
 import { auth } from '../../firebase'
 import { loginAuthAction } from '../../state/auth/authStateSlice'
+import { useHistory } from 'react-router-dom'
 import classNames from 'classnames/bind'
 import styles from './SignInForm.module.scss'
-import { useHistory } from 'react-router-dom'
 
 const cx = classNames.bind(styles)
 

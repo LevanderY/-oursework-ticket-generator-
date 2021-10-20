@@ -1,10 +1,12 @@
 import firebase from 'firebase/compat/app'
 import 'firebase/compat/auth'
-import { getDatabase } from 'firebase/database'
+import 'firebase/compat/firestore'
+import ReduxSagaFirebase from 'redux-saga-firebase'
 
 const app = firebase.initializeApp({
     apiKey: 'AIzaSyByRrcrIeou9sd952HeyHEP7XWioANlfFY',
-    authDomain: 'generator-dev.firebaseapp.com',
+    authDomain: 'tickets-generator-dev.firebaseapp.com',
+    databaseURL: 'https://tickets-generator-dev-default-rtdb.firebaseio.com',
     projectId: 'tickets-generator-dev',
     storageBucket: 'tickets-generator-dev.appspot.com',
     messagingSenderId: '846713060950',
@@ -12,7 +14,7 @@ const app = firebase.initializeApp({
 })
 
 export const auth = app.auth()
-export const database = getDatabase(app)
-export const fireStore = firebase.firestore
+export const firestore = app.firestore()
+export const rsf = new ReduxSagaFirebase(app)
 
 export default app
