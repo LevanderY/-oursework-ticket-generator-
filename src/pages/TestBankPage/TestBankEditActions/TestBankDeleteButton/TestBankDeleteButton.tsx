@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import { message, Popover } from 'antd'
 import { useDispatch } from 'react-redux'
 import { DeleteOutlined } from '@ant-design/icons'
-import { firestore } from '../../../../firebase'
+import { auth, firestore } from '../../../../firebase'
 import { loadingListTestsAction } from '../../../../state/tests/testsStateSlice'
 
 interface Props {
@@ -13,7 +13,7 @@ const TestBankDeleteButton: FC<Props> = ({ id }: Props) => {
     const dispatch = useDispatch()
     const onDeleteTestBankHandler = async () => {
         try {
-            await firestore.collection('test-banks').doc(id).delete()
+            await firestore.collection('root').doc(auth.currentUser?.uid).collection('test-banks').doc(id).delete()
             dispatch(loadingListTestsAction())
             message.success('Test bank has been deleted!')
         } catch (e: any | unknown) {

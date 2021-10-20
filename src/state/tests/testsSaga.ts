@@ -1,6 +1,6 @@
 import { put, takeLatest, all, call } from 'redux-saga/effects'
 import { loadingListTestsAction, loadingListTestsSuccess, TestBankListInterface } from './testsStateSlice'
-import { rsf } from '../../firebase'
+import { auth, rsf } from '../../firebase'
 import { ResponseGenerator } from '../_store/rootSaga'
 
 interface FirestoreItemSnapshotInterface {
@@ -10,13 +10,20 @@ interface FirestoreItemSnapshotInterface {
 
 function* loadingListBankTestSaga() {
     try {
-        const snapshot: ResponseGenerator = yield call(rsf.firestore.getCollection, 'test-banks')
-        let tests: TestBankListInterface[] = []
-        snapshot.forEach((test: FirestoreItemSnapshotInterface) => {
-            const data = test.data() as TestBankListInterface
-            data.id = test.id as string
-            tests.push(data)
+        const mainCollection: ResponseGenerator = yield call(rsf.firestore.getCollection, 'root')
+        const lessCollection: ResponseGenerator = yield call(rsf.firestore.getCollection, `root/${auth.currentUser?.uid}/test-banks`)
+
+        const tests: TestBankListInterface[] = []
+        mainCollection.forEach((test: FirestoreItemSnapshotInterface) => {
+            if (test.id === auth.currentUser?.uid) {
+                lessCollection.forEach((item: FirestoreItemSnapshotInterface) => {
+                    const data = item.data() as TestBankListInterface
+                    data.id = item.id as string
+                    tests.push(data)
+                })
+            }
         })
+
         yield put(loadingListTestsSuccess({ testBankList: tests }))
     } catch (e) {
         console.log(e)

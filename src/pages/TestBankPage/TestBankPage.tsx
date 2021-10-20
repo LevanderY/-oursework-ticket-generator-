@@ -16,6 +16,8 @@ const TestBankPage: React.FC = () => {
         dispatch(loadingListTestsAction())
     }, [dispatch])
 
+    //const hanlert = async () => await firestore.collection('test-banks').doc('Ns9i8FOb2nQzPs7rC9OYqutph8y2').collection('testsBank').doc('1').delete()
+
     return (
         <>
             <TestBankAddButton />

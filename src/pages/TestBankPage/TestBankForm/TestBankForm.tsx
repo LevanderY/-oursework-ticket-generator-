@@ -5,7 +5,7 @@ import { Button, Divider, message } from 'antd'
 import * as yup from 'yup'
 import { TextField } from '../../../components'
 import { loadingListTestsAction, TestsBankInterface } from '../../../state/tests/testsStateSlice'
-import { firestore } from '../../../firebase'
+import { firestore, auth } from '../../../firebase'
 
 export interface TestBanKFormValuesInterface {
     name: string
@@ -31,7 +31,9 @@ const TestBankForm: React.FC<Props> = ({ title, formValues, id, onCloseHandler }
     const initialValues: TestBanKFormValuesInterface = formValues ? formValues : initialFromValues
 
     const responseMethod = (id: string | undefined, values: TestBanKFormValuesInterface) =>
-        id ? firestore.collection('test-banks').doc(id).set(values) : firestore.collection('test-banks').add(values)
+        id
+            ? firestore.collection('root').doc(auth.currentUser?.uid).collection('test-banks').doc(id).set(values)
+            : firestore.collection('root').doc(auth.currentUser?.uid).collection('test-banks').add(values)
 
     const onSubmitHandler = async (values: TestBanKFormValuesInterface, { setErrors }: FormikHelpers<TestBanKFormValuesInterface>) => {
         try {
