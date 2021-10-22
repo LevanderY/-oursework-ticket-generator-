@@ -1,8 +1,23 @@
-import { configureStore } from '@reduxjs/toolkit'
-import { rootReducer } from './rootReducer'
+import { getDefaultMiddleware } from '@reduxjs/toolkit'
+import { routerMiddleware } from 'connected-react-router'
+import { composeWithDevTools } from 'redux-devtools-extension'
+import { applyMiddleware, createStore } from 'redux'
+import { createBrowserHistory } from 'history'
+import createSagaMiddleware from 'redux-saga'
+import rootSaga from './rootSaga'
+import { logger } from 'redux-logger'
+import { createRootReducer } from './createRootReducer'
 
-const store = configureStore({
-    reducer: rootReducer,
-})
+const sagaMiddleware = createSagaMiddleware()
+export const history = createBrowserHistory()
 
-export default store
+const devMode = process.env.NODE_ENV === 'development' && typeof window === 'object'
+
+export function configureStore() {
+    const middleware = [routerMiddleware(history), ...getDefaultMiddleware({ thunk: false }), sagaMiddleware]
+    if (devMode) middleware.push(logger)
+    const store = createStore(createRootReducer(history), composeWithDevTools(applyMiddleware(...middleware)))
+    sagaMiddleware.run(rootSaga)
+
+    return store
+}

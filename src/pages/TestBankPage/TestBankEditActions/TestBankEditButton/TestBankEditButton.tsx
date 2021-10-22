@@ -1,0 +1,26 @@
+import React, { FC } from 'react'
+import { Modal } from 'antd'
+import { EditOutlined } from '@ant-design/icons'
+import { TestBankForm } from '../../TestBankForm'
+import { useVisibleModal } from '../../../../hooks/useVisibleModal'
+import { TestBankListInterface } from '../../../../state/tests/testsStateSlice'
+
+interface Props {
+    id: string
+    formValues: TestBankListInterface
+}
+
+const TestBankEditButton: FC<Props> = ({ id, formValues }: Props) => {
+    const { isVisible, onOpenHandler, onCloseHandler } = useVisibleModal()
+
+    return (
+        <>
+            <EditOutlined onClick={onOpenHandler} />
+            <Modal onCancel={onCloseHandler} onOk={onOpenHandler} visible={isVisible} centered footer={null}>
+                <TestBankForm id={id} title={'Edit test bank'} onCloseHandler={onCloseHandler} formValues={formValues} />
+            </Modal>
+        </>
+    )
+}
+
+export { TestBankEditButton }

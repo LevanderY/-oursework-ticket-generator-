@@ -1,30 +1,49 @@
 import React from 'react'
 import { Field, Form, Formik, FormikHelpers } from 'formik'
-import { Button, Divider } from 'antd'
+import { useDispatch } from 'react-redux'
+import { Button, Divider, message } from 'antd'
 import * as yup from 'yup'
 import { TextField } from '../../../components'
+import { loadingListTestsAction, TestsBankInterface } from '../../../state/tests/testsStateSlice'
+import { firestore, auth } from '../../../firebase'
 
-interface TestBanKFormValuesInterface {
+interface TestBankFormInterface {
     name: string
     description: string
+    testsBank: TestsBankInterface[]
 }
 
 interface Props {
     title: string
+    formValues?: TestBankFormInterface
+    id?: string
+    onCloseHandler: () => void
 }
 
-const TestBankForm: React.FC<Props> = ({ title }: Props) => {
-    const initialValues: TestBanKFormValuesInterface = {
-        name: '',
-        description: '',
+const initialFromValues: TestBankFormInterface = {
+    name: '',
+    description: '',
+    testsBank: [],
+}
+
+const TestBankForm: React.FC<Props> = ({ title, id, onCloseHandler, formValues }: Props) => {
+    const dispatch = useDispatch()
+    const initialValues: TestBankFormInterface = formValues ? formValues : initialFromValues
+
+    const responseMethod = (id: string | undefined, values: TestBankFormInterface) => {
+        const data = firestore.collection('root').doc(auth.currentUser?.uid).collection('test-banks')
+        return id ? data.doc(id).set(values) : data.add(values)
     }
 
-    const onSubmitHandler = async (values: TestBanKFormValuesInterface, { setErrors }: FormikHelpers<TestBanKFormValuesInterface>) => {
-        const { name, description } = values
+    const onSubmitHandler = async (values: TestBankFormInterface, { setErrors }: FormikHelpers<TestBankFormInterface>) => {
         try {
-            console.log(`${name} ${description}`)
+            await responseMethod(id, values)
+            onCloseHandler()
+            dispatch(loadingListTestsAction())
+            message.success('Success response!')
         } catch (e: unknown | any) {
             setErrors(e?.response?.data)
+            message.error(`Opps, ${e?.response?.data}`)
         }
     }
 
@@ -40,7 +59,7 @@ const TestBankForm: React.FC<Props> = ({ title }: Props) => {
                 <Field type='name' name='name' label='Name' component={TextField} />
                 <Field type='description' name='description' label='Description' component={TextField} />
                 <Button htmlType='submit' type='primary'>
-                    SignUp
+                    {title}
                 </Button>
             </Form>
         </Formik>

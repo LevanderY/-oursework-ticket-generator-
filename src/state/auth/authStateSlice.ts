@@ -20,7 +20,7 @@ const authState = createSlice({
         },
         logoutAuthAction(state) {
             state.isLogin = false
-            state.idToken = ''
+            state.idToken = undefined
         },
     },
 })

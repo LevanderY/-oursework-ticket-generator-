@@ -15,7 +15,7 @@ const Root: React.FC = () => {
             <Route path={'/signup'} component={SignUpForm} />
             <Route path={'/login'} component={SignInForm} />
             <NavigationBar>
-                <PrivateRoute redirectPath={'/login'} path={'/'} component={TestBankPage} />
+                <PrivateRoute redirectPath={'/login'} path={'/tests-bank'} component={TestBankPage} />
                 <PrivateRoute redirectPath={'/login'} path={'/profile'} component={ProfilePage} />
             </NavigationBar>
         </Switch>

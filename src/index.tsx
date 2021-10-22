@@ -5,13 +5,18 @@ import reportWebVitals from './reportWebVitals'
 import { Root } from './components'
 import { BrowserRouter as Route } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import store from './state/_store/configurateStore'
+import { configureStore, history } from './state/_store/configurateStore'
+import { ConnectedRouter } from 'connected-react-router'
+
+const store = configureStore()
 
 ReactDOM.render(
     <React.StrictMode>
         <Route>
             <Provider store={store}>
-                <Root />
+                <ConnectedRouter history={history}>
+                    <Root />
+                </ConnectedRouter>
             </Provider>
         </Route>
     </React.StrictMode>,

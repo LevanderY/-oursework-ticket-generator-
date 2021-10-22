@@ -1,0 +1,36 @@
+import React, { FC } from 'react'
+import { EditOutlined, UnorderedListOutlined } from '@ant-design/icons'
+import { Modal, List, Popover } from 'antd'
+import { TestBankListInterface, TestsBankInterface } from '../../../../state/tests/testsStateSlice'
+import { useVisibleModal } from '../../../../hooks/useVisibleModal'
+import { TestsDeleteIconButton } from '../TestsDeleteIconButton'
+
+interface Props extends TestBankListInterface {}
+
+const TestsListModalButton: FC<Props> = ({ id, name, description, testsBank }: Props) => {
+    const { onCloseHandler, onOpenHandler, isVisible } = useVisibleModal()
+    const currentTestBankId: string = id
+
+    return (
+        <>
+            <UnorderedListOutlined onClick={onOpenHandler} />
+            <Modal onCancel={onCloseHandler} onOk={onOpenHandler} visible={isVisible} centered footer={null}>
+                <List
+                    itemLayout='horizontal'
+                    dataSource={testsBank}
+                    renderItem={({ id, test }: TestsBankInterface) => (
+                        <List.Item key={id}>
+                            <List.Item.Meta title={`Test`} description={test} />
+                            <Popover title={'Edit test!'} trigger='hover'>
+                                <EditOutlined />
+                            </Popover>
+                            <TestsDeleteIconButton currentTestId={id} formValues={{ id: currentTestBankId, name, description, testsBank }} />
+                        </List.Item>
+                    )}
+                />
+            </Modal>
+        </>
+    )
+}
+
+export { TestsListModalButton }

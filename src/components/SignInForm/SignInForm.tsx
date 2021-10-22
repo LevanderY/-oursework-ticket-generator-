@@ -6,9 +6,9 @@ import { Field, Form, Formik } from 'formik'
 import { TextField } from '../index'
 import { auth } from '../../firebase'
 import { loginAuthAction } from '../../state/auth/authStateSlice'
+import { useHistory } from 'react-router-dom'
 import classNames from 'classnames/bind'
 import styles from './SignInForm.module.scss'
-import { useHistory } from 'react-router-dom'
 
 const cx = classNames.bind(styles)
 
@@ -41,7 +41,7 @@ const SignInForm: React.FC = () => {
             await auth.signInWithEmailAndPassword(email, password)
             const idToken = await auth.currentUser?.getIdToken()
             dispatch(loginAuthAction({ idToken: idToken }))
-            history.push('/')
+            history.push('/tests-bank')
             message.success('Login successful')
         } catch {
             message.error(`Invalid email or password!`)

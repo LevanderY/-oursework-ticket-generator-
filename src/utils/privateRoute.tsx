@@ -1,7 +1,7 @@
 import React from 'react'
 import { Redirect, Route, RouteProps } from 'react-router'
 import { useSelector } from 'react-redux'
-import { AppStateInterface } from '../state/_store/rootReducer'
+import { AppStateInterface } from '../state/_store/createRootReducer'
 
 export interface IPrivateRouteProps extends RouteProps {
     redirectPath: string
