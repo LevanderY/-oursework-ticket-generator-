@@ -1,10 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-export interface FirestoreDataInterface {
-    testBankList: TestBankListInterface[]
-    ticketsBankList: any[]
-}
-
 export interface TestsBankInterface {
     id: string
     test: string

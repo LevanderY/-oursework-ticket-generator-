@@ -30,17 +30,17 @@ const TestBankForm: React.FC<Props> = ({ title, formValues, id, onCloseHandler }
     const dispatch = useDispatch()
     const initialValues: TestBanKFormValuesInterface = formValues ? formValues : initialFromValues
 
-    const responseMethod = (id: string | undefined, values: TestBanKFormValuesInterface) =>
-        id
-            ? firestore.collection('root').doc(auth.currentUser?.uid).collection('test-banks').doc(id).set(values)
-            : firestore.collection('root').doc(auth.currentUser?.uid).collection('test-banks').add(values)
+    const responseMethod = (id: string | undefined, values: TestBanKFormValuesInterface) => {
+        const data = firestore.collection('root').doc(auth.currentUser?.uid).collection('test-banks')
+        return id ? data.doc(id).set(values) : data.add(values)
+    }
 
     const onSubmitHandler = async (values: TestBanKFormValuesInterface, { setErrors }: FormikHelpers<TestBanKFormValuesInterface>) => {
         try {
             await responseMethod(id, values)
             onCloseHandler()
             dispatch(loadingListTestsAction())
-            message.success('Test bank has been edited!')
+            message.success('Success response!')
         } catch (e: unknown | any) {
             setErrors(e?.response?.data)
             message.error(`Opps, ${e?.response?.data}`)

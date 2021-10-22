@@ -30,7 +30,7 @@ const TestBankPage: React.FC = () => {
                                 actions={[
                                     <TestBankEditButton key={'edit'} id={id} formValues={{ testsBank, name, description }} />,
                                     <TestBankDeleteButton key={'delete'} id={id} />,
-                                    <TestsListModalButton key={'show'} testBank={testsBank} />,
+                                    <TestsListModalButton key={'show'} id={id} name={name} description={description} testsBank={testsBank} />,
                                 ]}
                                 style={{ marginTop: 16 }}
                                 loading={isTestBankLoading}

@@ -14,6 +14,7 @@ function* loadingListBankTestSaga() {
         const lessCollection: ResponseGenerator = yield call(rsf.firestore.getCollection, `root/${auth.currentUser?.uid}/test-banks`)
 
         const tests: TestBankListInterface[] = []
+
         mainCollection.forEach((test: FirestoreItemSnapshotInterface) => {
             if (test.id === auth.currentUser?.uid) {
                 lessCollection.forEach((item: FirestoreItemSnapshotInterface) => {
