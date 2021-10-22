@@ -5,7 +5,7 @@ import LoadingSpin from '../../components/spins/LoadingSpin'
 import { TestBankAddButton, TestBankDeleteButton, TestBankEditButton } from './TestBankEditActions'
 import { loadingListTestsAction, TestBankListInterface } from '../../state/tests/testsStateSlice'
 import { AppStateInterface } from '../../state/_store/createRootReducer'
-import { TestsListModalButton } from './TestsActions'
+import { TestsAddIconButton, TestsListModalButton } from './TestsActions'
 const { Meta } = Card
 
 const TestBankPage: React.FC = () => {
@@ -15,8 +15,6 @@ const TestBankPage: React.FC = () => {
     useEffect(() => {
         dispatch(loadingListTestsAction())
     }, [dispatch])
-
-    //const hanlert = async () => await firestore.collection('test-banks').doc('Ns9i8FOb2nQzPs7rC9OYqutph8y2').collection('testsBank').doc('1').delete()
 
     return (
         <>
@@ -30,12 +28,14 @@ const TestBankPage: React.FC = () => {
                                 actions={[
                                     <TestBankEditButton key={'edit'} id={id} formValues={{ testsBank, name, description }} />,
                                     <TestBankDeleteButton key={'delete'} id={id} />,
-                                    <TestsListModalButton key={'show'} testBank={testsBank} />,
+                                    <TestsListModalButton key={'show'} id={id} name={name} description={description} testsBank={testsBank} />,
                                 ]}
+                                extra={<TestsAddIconButton id={id} name={name} description={description} testsBank={testsBank} />}
+                                title={name}
                                 style={{ marginTop: 16 }}
                                 loading={isTestBankLoading}
                             >
-                                <Meta title={name} description={description} />
+                                <Meta description={description} />
                             </Card>
                         </Col>
                     ))}
