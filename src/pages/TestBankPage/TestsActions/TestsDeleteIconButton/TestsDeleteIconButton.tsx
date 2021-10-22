@@ -11,7 +11,7 @@ interface Props {
     formValues: TestBankListInterface
 }
 
-const TestDeleteIconButton: FC<Props> = ({ formValues: { id, name, description, testsBank }, currentTestId }: Props) => {
+const TestsDeleteIconButton: FC<Props> = ({ formValues: { id, name, description, testsBank }, currentTestId }: Props) => {
     const dispatch = useDispatch()
 
     const values: TestBankListInterface = {
@@ -44,4 +44,4 @@ const TestDeleteIconButton: FC<Props> = ({ formValues: { id, name, description, 
     )
 }
 
-export { TestDeleteIconButton }
+export { TestsDeleteIconButton }
