@@ -26,7 +26,7 @@ const TestBankPage: React.FC = () => {
                         <Col span={5} key={id} style={{ margin: 10 }}>
                             <Card
                                 actions={[
-                                    <TestBankEditButton key={'edit'} id={id} formValues={{ testsBank, name, description }} />,
+                                    <TestBankEditButton key={'edit'} id={id} formValues={{ id, name, description, testsBank }} />,
                                     <TestBankDeleteButton key={'delete'} id={id} />,
                                     <TestsListModalButton key={'show'} id={id} name={name} description={description} testsBank={testsBank} />,
                                 ]}

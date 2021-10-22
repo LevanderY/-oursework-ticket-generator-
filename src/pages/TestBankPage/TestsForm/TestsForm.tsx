@@ -5,8 +5,12 @@ import { Field, Form, Formik, FormikHelpers } from 'formik'
 import { Button, Divider, message } from 'antd'
 import { TextField } from '../../../components'
 import { loadingListTestsAction, TestBankListInterface, TestsBankInterface } from '../../../state/tests/testsStateSlice'
-import { TestBanKFormValuesInterface } from '../TestBankForm'
 import { auth, firestore } from '../../../firebase'
+
+interface TestBanKFormValuesInterface {
+    name: string
+    description: string
+}
 
 interface Props {
     onCloseHandler: () => void

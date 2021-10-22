@@ -4,7 +4,6 @@ import { DeleteOutlined } from '@ant-design/icons'
 import { useDispatch } from 'react-redux'
 import { loadingListTestsAction, TestBankListInterface, TestsBankInterface } from '../../../../state/tests/testsStateSlice'
 import { auth, firestore } from '../../../../firebase'
-import { TestBanKFormValuesInterface } from '../../TestBankForm'
 
 interface Props {
     currentTestId: string
@@ -21,12 +20,12 @@ const TestsDeleteIconButton: FC<Props> = ({ formValues: { id, name, description,
         testsBank,
     }
 
-    const responseMethod = (id: string | undefined, values: TestBanKFormValuesInterface) => {
+    const responseMethod = (id: string | undefined, values: TestBankListInterface) => {
         const data = firestore.collection('root').doc(auth.currentUser?.uid).collection('test-banks')
         return data.doc(id).set(values)
     }
 
-    const onDeleteTestHandler = (id: string | undefined, values: TestBanKFormValuesInterface) => async () => {
+    const onDeleteTestHandler = (id: string | undefined, values: TestBankListInterface) => async () => {
         values.testsBank = values.testsBank.filter(({ id }: TestsBankInterface) => id !== currentTestId)
         try {
             await responseMethod(id, values)

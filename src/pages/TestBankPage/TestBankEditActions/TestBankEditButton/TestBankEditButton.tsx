@@ -1,12 +1,13 @@
 import React, { FC } from 'react'
 import { Modal } from 'antd'
 import { EditOutlined } from '@ant-design/icons'
-import { TestBankForm, TestBanKFormValuesInterface } from '../../TestBankForm'
+import { TestBankForm } from '../../TestBankForm'
 import { useVisibleModal } from '../../../../hooks/useVisibleModal'
+import { TestBankListInterface } from '../../../../state/tests/testsStateSlice'
 
 interface Props {
     id: string
-    formValues: TestBanKFormValuesInterface
+    formValues: TestBankListInterface
 }
 
 const TestBankEditButton: FC<Props> = ({ id, formValues }: Props) => {

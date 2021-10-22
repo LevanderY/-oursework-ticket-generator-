@@ -7,7 +7,7 @@ import { TextField } from '../../../components'
 import { loadingListTestsAction, TestsBankInterface } from '../../../state/tests/testsStateSlice'
 import { firestore, auth } from '../../../firebase'
 
-export interface TestBanKFormValuesInterface {
+interface TestBankFormInterface {
     name: string
     description: string
     testsBank: TestsBankInterface[]
@@ -15,27 +15,27 @@ export interface TestBanKFormValuesInterface {
 
 interface Props {
     title: string
-    formValues?: TestBanKFormValuesInterface
+    formValues?: TestBankFormInterface
     id?: string
     onCloseHandler: () => void
 }
 
-const initialFromValues: TestBanKFormValuesInterface = {
+const initialFromValues: TestBankFormInterface = {
     name: '',
     description: '',
     testsBank: [],
 }
 
-const TestBankForm: React.FC<Props> = ({ title, formValues, id, onCloseHandler }: Props) => {
+const TestBankForm: React.FC<Props> = ({ title, id, onCloseHandler, formValues }: Props) => {
     const dispatch = useDispatch()
-    const initialValues: TestBanKFormValuesInterface = formValues ? formValues : initialFromValues
+    const initialValues: TestBankFormInterface = formValues ? formValues : initialFromValues
 
-    const responseMethod = (id: string | undefined, values: TestBanKFormValuesInterface) => {
+    const responseMethod = (id: string | undefined, values: TestBankFormInterface) => {
         const data = firestore.collection('root').doc(auth.currentUser?.uid).collection('test-banks')
         return id ? data.doc(id).set(values) : data.add(values)
     }
 
-    const onSubmitHandler = async (values: TestBanKFormValuesInterface, { setErrors }: FormikHelpers<TestBanKFormValuesInterface>) => {
+    const onSubmitHandler = async (values: TestBankFormInterface, { setErrors }: FormikHelpers<TestBankFormInterface>) => {
         try {
             await responseMethod(id, values)
             onCloseHandler()
