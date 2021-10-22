@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
-import { UnorderedListOutlined } from '@ant-design/icons'
-import { Modal, List } from 'antd'
+import { EditOutlined, UnorderedListOutlined } from '@ant-design/icons'
+import { Modal, List, Popover } from 'antd'
 import { TestBankListInterface, TestsBankInterface } from '../../../../state/tests/testsStateSlice'
 import { useVisibleModal } from '../../../../hooks/useVisibleModal'
 import { TestsDeleteIconButton } from '../TestsDeleteIconButton'
@@ -21,6 +21,9 @@ const TestsListModalButton: FC<Props> = ({ id, name, description, testsBank }: P
                     renderItem={({ id, test }: TestsBankInterface) => (
                         <List.Item key={id}>
                             <List.Item.Meta title={`Test`} description={test} />
+                            <Popover title={'Edit test!'} trigger='hover'>
+                                <EditOutlined />
+                            </Popover>
                             <TestsDeleteIconButton currentTestId={id} formValues={{ id: currentTestBankId, name, description, testsBank }} />
                         </List.Item>
                     )}
