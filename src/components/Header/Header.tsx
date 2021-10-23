@@ -31,7 +31,7 @@ const Header: React.FC = () => {
             title={<span className={cx('title')}>Tests generator</span>}
             subTitle={<span className={cx('subtitle')}>by Yuriy Leshchyshyn</span>}
             extra={[
-                <Button onClick={onLogOutHandler} key={'1'} type='primary' icon={<ExportOutlined />}>
+                <Button onClick={onLogOutHandler} key={'1'} ghost icon={<ExportOutlined />}>
                     Exit
                 </Button>,
             ]}

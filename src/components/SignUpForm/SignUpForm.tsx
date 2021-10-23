@@ -1,9 +1,10 @@
 import React from 'react'
+import { useHistory } from 'react-router-dom'
 import * as yup from 'yup'
 import { Button, message } from 'antd'
 import { Field, Form, Formik, FormikHelpers } from 'formik'
-import { auth } from '../../firebase'
 import { TextField } from '../index'
+import { auth } from '../../firebase'
 import classNames from 'classnames/bind'
 import styles from './SignUpForm.module.scss'
 
@@ -16,6 +17,8 @@ interface SignUpIValuesInterface {
 }
 
 const SignUpForm: React.FC = () => {
+    const history = useHistory()
+
     const initialValues: SignUpIValuesInterface = {
         email: '',
         password: '',
@@ -23,7 +26,7 @@ const SignUpForm: React.FC = () => {
     }
 
     const validationSchema = yup.object().shape({
-        email: yup.string().email().required('Required field').min(2, 'Too Short!').max(30, 'Too Long!'),
+        email: yup.string().email().required('Required field').min(2, 'Too Short!').max(40, 'Too Long!'),
         password: yup
             .string()
             .required('Required field')
@@ -39,6 +42,7 @@ const SignUpForm: React.FC = () => {
         try {
             const { email, password } = values
             await auth.createUserWithEmailAndPassword(email, password)
+            history.push('/login')
             message.success('Login successful')
         } catch (e: unknown | any) {
             setErrors(e?.response?.data)
