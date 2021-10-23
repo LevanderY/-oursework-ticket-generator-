@@ -55,7 +55,7 @@ const TestBankForm: React.FC<Props> = ({ title, id, onCloseHandler, formValues }
     return (
         <Formik initialValues={initialValues} onSubmit={onSubmitHandler} validationSchema={validationSchema}>
             <Form autoComplete='off'>
-                <Divider>{title}</Divider>
+                <Divider key={id}>{title}</Divider>
                 <Field type='name' name='name' label='Name' component={TextField} />
                 <Field type='description' name='description' label='Description' component={TextField} />
                 <Button htmlType='submit' ghost>

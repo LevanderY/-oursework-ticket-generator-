@@ -9,7 +9,7 @@ const SideBarNavigation: React.FC = () => {
 
     return (
         <Menu style={{ height: '100vh' }} defaultSelectedKeys={['1']} mode={'vertical'} theme={'dark'} inlineCollapsed={isToggleCollapse}>
-            <Divider orientation={'left'}>
+            <Divider key='5' orientation={'left'}>
                 <Button ghost onClick={onCollapseHandler}>
                     {isToggleCollapse ? <MenuUnfoldOutlined /> : <AlignLeftOutlined />}
                 </Button>

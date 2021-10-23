@@ -66,3 +66,24 @@ body {
 .ant-input:hover {
   border-color: rgba(255, 255, 255, 0.65) !important;
 }
+
+// Table
+.ant-table {
+  color: rgba(255, 255, 255, 0.65) !important;
+  background: #141414 !important;
+}
+
+.ant-table-thead > tr > th {
+  color: rgba(255,255,255,0.85) !important;
+  background: #1d1d1d !important;
+  border: 1px solid #303030 !important;
+  transition: background .3s ease !important;
+}
+
+.ant-table-tbody > tr > td {
+  border-bottom: 1px solid #303030 !important;
+}
+
+.ant-table-tbody > tr.ant-table-row:hover > td {
+  background: #262626 !important;
+}

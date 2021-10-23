@@ -11,7 +11,7 @@ const TestBankAddButton: React.FC = () => {
             <Button ghost onClick={onOpenHandler}>
                 Create test bank
             </Button>
-            <Modal onCancel={onCloseHandler} onOk={onOpenHandler} visible={isVisible} centered footer={null}>
+            <Modal visible={isVisible} onCancel={onCloseHandler} centered mask footer={null}>
                 <TestBankForm title={'Create test bank'} onCloseHandler={onCloseHandler} />
             </Modal>
         </>
