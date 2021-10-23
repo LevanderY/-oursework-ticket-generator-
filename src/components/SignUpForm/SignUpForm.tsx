@@ -4,7 +4,7 @@ import * as yup from 'yup'
 import { Button, message } from 'antd'
 import { Field, Form, Formik, FormikHelpers } from 'formik'
 import { TextField } from '../index'
-import { auth } from '../../firebase'
+import { auth, firestore } from '../../firebase'
 import classNames from 'classnames/bind'
 import styles from './SignUpForm.module.scss'
 
