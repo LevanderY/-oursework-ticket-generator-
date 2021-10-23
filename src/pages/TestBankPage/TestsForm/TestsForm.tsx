@@ -61,7 +61,7 @@ const TestsForm: FC<Props> = ({ formValues: { id, name, description, testsBank }
             <Form autoComplete='off'>
                 <Divider>{title}</Divider>
                 <Field type='text' name='test' label='Test description' component={TextField} />
-                <Button htmlType='submit' type='primary'>
+                <Button htmlType='submit' ghost>
                     {title}
                 </Button>
             </Form>

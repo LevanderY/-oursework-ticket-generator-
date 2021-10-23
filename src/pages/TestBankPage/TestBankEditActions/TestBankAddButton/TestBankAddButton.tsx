@@ -8,7 +8,7 @@ const TestBankAddButton: React.FC = () => {
 
     return (
         <>
-            <Button type='primary' ghost onClick={onOpenHandler}>
+            <Button ghost onClick={onOpenHandler}>
                 Create test bank
             </Button>
             <Modal onCancel={onCloseHandler} onOk={onOpenHandler} visible={isVisible} centered footer={null}>

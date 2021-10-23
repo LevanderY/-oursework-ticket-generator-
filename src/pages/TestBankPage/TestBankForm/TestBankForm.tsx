@@ -58,7 +58,7 @@ const TestBankForm: React.FC<Props> = ({ title, id, onCloseHandler, formValues }
                 <Divider>{title}</Divider>
                 <Field type='name' name='name' label='Name' component={TextField} />
                 <Field type='description' name='description' label='Description' component={TextField} />
-                <Button htmlType='submit' type='primary'>
+                <Button htmlType='submit' ghost>
                     {title}
                 </Button>
             </Form>
