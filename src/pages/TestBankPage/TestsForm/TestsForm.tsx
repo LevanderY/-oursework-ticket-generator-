@@ -57,7 +57,7 @@ const TestsForm: FC<Props> = ({ formValues: { id, name, description, testsBank }
     }
 
     const validationSchema = yup.object().shape({
-        test: yup.string().required('Required field').min(4, 'Test is to short').max(40, 'Name is to long'),
+        test: yup.string().required('Required field').min(4, 'Test is to short').max(100, 'Test description is to long'),
     })
 
     return (

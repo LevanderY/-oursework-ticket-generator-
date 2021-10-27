@@ -4,7 +4,7 @@ import { Header } from '../Header'
 import { SideBarNavigation } from '../SideBarNavigation'
 
 const NavigationBar: React.FC = ({ children }) => (
-    <Row wrap>
+    <Row>
         <Col>
             <SideBarNavigation />
         </Col>

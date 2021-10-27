@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { UnorderedListOutlined } from '@ant-design/icons'
+import { FolderOpenTwoTone } from '@ant-design/icons'
 import { Link } from 'react-router-dom'
 import { TestBankListInterface } from '../../../state/tests/testsStateSlice'
 
@@ -18,7 +18,7 @@ const TestsListRedirectLink: FC<Props> = ({ id, testsBank, name, description }: 
                 },
             }}
         >
-            <UnorderedListOutlined />
+            <FolderOpenTwoTone twoToneColor={'#fff'} />
         </Link>
     )
 }

@@ -48,8 +48,8 @@ const TestBankForm: React.FC<Props> = ({ title, id, onCloseHandler, formValues }
     }
 
     const validationSchema = yup.object().shape({
-        name: yup.string().required('Required field').min(4, 'Name is to short').max(12, 'Name is to long'),
-        description: yup.string().required('Required field').min(6, 'Description is to short').max(40, 'Description is to long'),
+        name: yup.string().required('Required field').min(4, 'Name is to short').max(25, 'Name is to long'),
+        description: yup.string().required('Required field').min(6, 'Description is to short').max(70, 'Description is to long'),
     })
 
     return (

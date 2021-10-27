@@ -1,18 +1,19 @@
 import React, { FC, useEffect, useCallback, useState } from 'react'
 import { Table } from 'antd'
 import { useLocation } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { createBrowserHistory } from 'history'
 import { LoadingSpin } from '../../components'
 import { TestsActions, TestsAddIconButton } from '../TestBankPage'
 import { AppStateInterface } from '../../state/_store/createRootReducer'
-import { TestBankListInterface, TestsBankInterface } from '../../state/tests/testsStateSlice'
+import { loadingListTestsAction, TestBankListInterface, TestsBankInterface } from '../../state/tests/testsStateSlice'
 
 const { Column } = Table
 
 interface TestListLocationInterface extends TestBankListInterface {}
 
 const TestsListPage: FC = () => {
+    const dispatch = useDispatch()
     const history = createBrowserHistory()
     const location = useLocation<TestListLocationInterface>()
     const { isTestBankLoading, isHaveFirstLoading, testBankList } = useSelector((state: AppStateInterface) => state.tests)
@@ -30,6 +31,10 @@ const TestsListPage: FC = () => {
     }, [history, location, testBankList])
 
     useEffect(() => {
+        dispatch(loadingListTestsAction())
+    }, [dispatch])
+
+    useEffect(() => {
         updateHistory()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [testBankList])
@@ -40,7 +45,7 @@ const TestsListPage: FC = () => {
             {isHaveFirstLoading && (
                 <>
                     <TestsAddIconButton formValues={{ testsBank, id, name, description }} />
-                    <Table key={id} dataSource={testsBank} size='small' pagination={false} loading={isTestBankLoading}>
+                    <Table style={{ marginTop: '16px' }} dataSource={testsBank} size='small' pagination={false} loading={isTestBankLoading}>
                         <Column title={'Test title'} dataIndex={'test'} key={'testTitle'} />
                         <Column
                             title={'Actions'}

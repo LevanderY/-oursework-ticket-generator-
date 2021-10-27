@@ -63,22 +63,26 @@ body {
 
 .ant-table {
   color: rgba(255, 255, 255, 0.65) !important;
-  background: #141414 !important;
+  background: #23232e !important;
 }
 
 .ant-table-thead > tr > th {
   color: rgba(255, 255, 255, 0.85) !important;
-  background: #1d1d1d !important;
+  background: #30303d !important;
   border: 1px solid #303030 !important;
   transition: background 0.3s ease !important;
 }
 
 .ant-table-tbody > tr > td {
-  border-bottom: 1px solid #303030 !important;
+  border-bottom: 1px solid #05050b !important;
 }
 
 .ant-table-tbody > tr.ant-table-row:hover > td {
-  background: #262626 !important;
+  background: #30303d !important;
+}
+
+.ant-table-tbody > tr.ant-table-placeholder:hover > td {
+  background-color: #30303d !important;
 }
 
 /*# sourceMappingURL=index.css.map */
