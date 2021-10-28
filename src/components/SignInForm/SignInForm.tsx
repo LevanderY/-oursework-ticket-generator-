@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import { Button, message } from 'antd'
 import { Field, Form, Formik } from 'formik'
 import { TextField } from '../index'
-import { auth } from '../../firebase'
+import { auth, firestore } from '../../firebase'
 import { loginAuthAction } from '../../state/auth/authStateSlice'
 import { useHistory } from 'react-router-dom'
 import classNames from 'classnames/bind'
@@ -38,9 +38,13 @@ const SignInForm: React.FC = () => {
     const onSubmitHandler = async (values: SignInIValuesInterface) => {
         try {
             const { email, password } = values
+
             await auth.signInWithEmailAndPassword(email, password)
+            await firestore.collection('root').doc(auth.currentUser?.uid).set({})
+
             const idToken = await auth.currentUser?.getIdToken()
             dispatch(loginAuthAction({ idToken: idToken }))
+
             history.push('/tests-bank')
             message.success('Login successful')
         } catch {

@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { message, Popover } from 'antd'
 import { useDispatch } from 'react-redux'
-import { DeleteOutlined } from '@ant-design/icons'
+import { DeleteTwoTone } from '@ant-design/icons'
 import { auth, firestore } from '../../../../firebase'
 import { loadingListTestsAction } from '../../../../state/tests/testsStateSlice'
 
@@ -22,7 +22,7 @@ const TestBankDeleteButton: FC<Props> = ({ id }: Props) => {
     }
     return (
         <Popover title={'Delete Test bank?'} trigger='hover'>
-            <DeleteOutlined onClick={onDeleteTestBankHandler} />
+            <DeleteTwoTone twoToneColor={'#fff'} onClick={onDeleteTestBankHandler} />
         </Popover>
     )
 }

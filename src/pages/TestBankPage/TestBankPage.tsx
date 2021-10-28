@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react'
 import { Row, Col, Card } from 'antd'
 import { useDispatch, useSelector } from 'react-redux'
-import LoadingSpin from '../../components/spins/LoadingSpin'
+import { LoadingSpin } from '../../components'
+import { TestsListRedirectLink } from './TestsListRedirectLink'
 import { TestBankAddButton, TestBankDeleteButton, TestBankEditButton } from './TestBankEditActions'
 import { loadingListTestsAction, TestBankListInterface } from '../../state/tests/testsStateSlice'
 import { AppStateInterface } from '../../state/_store/createRootReducer'
-import { TestsAddIconButton, TestsListModalButton } from './TestsActions'
+
 const { Meta } = Card
 
 const TestBankPage: React.FC = () => {
@@ -28,12 +29,13 @@ const TestBankPage: React.FC = () => {
                                 actions={[
                                     <TestBankEditButton key={'edit'} id={id} formValues={{ id, name, description, testsBank }} />,
                                     <TestBankDeleteButton key={'delete'} id={id} />,
-                                    <TestsListModalButton key={'show'} id={id} name={name} description={description} testsBank={testsBank} />,
+                                    <TestsListRedirectLink key={'redirectLink'} id={id} name={name} description={description} testsBank={testsBank} />,
                                 ]}
-                                extra={<TestsAddIconButton id={id} name={name} description={description} testsBank={testsBank} />}
+                                // extra={<TestsAddIconButton key={'add-test'} id={id} name={name} description={description} testsBank={testsBank} />}
                                 title={name}
                                 style={{ marginTop: 16 }}
                                 loading={isTestBankLoading}
+                                key={id}
                             >
                                 <Meta description={description} />
                             </Card>

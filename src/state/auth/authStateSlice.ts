@@ -1,12 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 export interface StateAuthInterface {
-    idToken: string | undefined
     isLogin: boolean
 }
 
 const initialState: StateAuthInterface = {
-    idToken: undefined,
     isLogin: false,
 }
 
@@ -16,11 +14,11 @@ const authState = createSlice({
     reducers: {
         loginAuthAction(state, { payload: { idToken } }: PayloadAction<{ idToken: string | undefined }>) {
             state.isLogin = true
-            state.idToken = idToken
+            localStorage.setItem('token', idToken ? idToken : '')
         },
         logoutAuthAction(state) {
             state.isLogin = false
-            state.idToken = undefined
+            localStorage.removeItem('token')
         },
     },
 })

@@ -1,22 +1,23 @@
 import React, { FC } from 'react'
 import { useVisibleModal } from '../../../../hooks/useVisibleModal'
-import { PlusOutlined } from '@ant-design/icons'
-import { Modal, Popover } from 'antd'
-import { TestBankListInterface } from '../../../../state/tests/testsStateSlice'
+import { Button, Modal } from 'antd'
 import { TestsForm } from '../../TestsForm/TestsForm'
+import { TestBankListInterface } from '../../../../state/tests/testsStateSlice'
 
-interface Props extends TestBankListInterface {}
+interface Props {
+    formValues: TestBankListInterface
+}
 
-const TestsAddIconButton: FC<Props> = ({ id, name, description, testsBank }: Props) => {
+const TestsAddIconButton: FC<Props> = ({ formValues }: Props) => {
     const { isVisible, onOpenHandler, onCloseHandler } = useVisibleModal()
 
     return (
         <>
-            <Popover title={'Add test!'} trigger='hover'>
-                <PlusOutlined onClick={onOpenHandler} />
-            </Popover>
+            <Button ghost onClick={onOpenHandler}>
+                Create test bank
+            </Button>
             <Modal onCancel={onCloseHandler} onOk={onOpenHandler} visible={isVisible} centered footer={null}>
-                <TestsForm onCloseHandler={onCloseHandler} title={'Create test'} formValues={{ id, name, description, testsBank }} />
+                <TestsForm title={'Create test'} onCloseHandler={onCloseHandler} formValues={formValues} />
             </Modal>
         </>
     )
