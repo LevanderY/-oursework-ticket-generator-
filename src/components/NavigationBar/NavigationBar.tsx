@@ -1,14 +1,14 @@
 import React from 'react'
 import { Col, Row } from 'antd'
-import { SideBar } from '../SideBar'
 import { Header } from '../Header'
+import { SideBarNavigation } from '../SideBarNavigation'
 
 const NavigationBar: React.FC = ({ children }) => (
     <Row>
-        <Col span={3}>
-            <SideBar />
+        <Col>
+            <SideBarNavigation />
         </Col>
-        <Col span={21}>
+        <Col flex='auto'>
             <Header />
             <div className='container'>{children}</div>
         </Col>

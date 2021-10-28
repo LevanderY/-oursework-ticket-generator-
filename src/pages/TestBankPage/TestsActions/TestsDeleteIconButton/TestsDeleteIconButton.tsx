@@ -12,13 +12,7 @@ interface Props {
 
 const TestsDeleteIconButton: FC<Props> = ({ formValues: { id, name, description, testsBank }, currentTestId }: Props) => {
     const dispatch = useDispatch()
-
-    const values: TestBankListInterface = {
-        id,
-        name,
-        description,
-        testsBank,
-    }
+    const values: TestBankListInterface = { id, name, description, testsBank }
 
     const responseMethod = (id: string | undefined, values: TestBankListInterface) => {
         const data = firestore.collection('root').doc(auth.currentUser?.uid).collection('test-banks')

@@ -48,17 +48,17 @@ const TestBankForm: React.FC<Props> = ({ title, id, onCloseHandler, formValues }
     }
 
     const validationSchema = yup.object().shape({
-        name: yup.string().required('Required field').min(4, 'Name is to short').max(12, 'Name is to long'),
-        description: yup.string().required('Required field').min(6, 'Description is to short').max(40, 'Description is to long'),
+        name: yup.string().required('Required field').min(4, 'Name is to short').max(25, 'Name is to long'),
+        description: yup.string().required('Required field').min(6, 'Description is to short').max(70, 'Description is to long'),
     })
 
     return (
         <Formik initialValues={initialValues} onSubmit={onSubmitHandler} validationSchema={validationSchema}>
             <Form autoComplete='off'>
-                <Divider>{title}</Divider>
+                <Divider key={id}>{title}</Divider>
                 <Field type='name' name='name' label='Name' component={TextField} />
                 <Field type='description' name='description' label='Description' component={TextField} />
-                <Button htmlType='submit' type='primary'>
+                <Button htmlType='submit' ghost>
                     {title}
                 </Button>
             </Form>

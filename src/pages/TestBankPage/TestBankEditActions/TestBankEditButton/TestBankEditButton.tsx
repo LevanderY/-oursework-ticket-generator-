@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { Modal } from 'antd'
-import { EditOutlined } from '@ant-design/icons'
+import { EditTwoTone } from '@ant-design/icons'
 import { TestBankForm } from '../../TestBankForm'
 import { useVisibleModal } from '../../../../hooks/useVisibleModal'
 import { TestBankListInterface } from '../../../../state/tests/testsStateSlice'
@@ -15,7 +15,7 @@ const TestBankEditButton: FC<Props> = ({ id, formValues }: Props) => {
 
     return (
         <>
-            <EditOutlined onClick={onOpenHandler} />
+            <EditTwoTone twoToneColor='#fff' onClick={onOpenHandler} />
             <Modal onCancel={onCloseHandler} onOk={onOpenHandler} visible={isVisible} centered footer={null}>
                 <TestBankForm id={id} title={'Edit test bank'} onCloseHandler={onCloseHandler} formValues={formValues} />
             </Modal>

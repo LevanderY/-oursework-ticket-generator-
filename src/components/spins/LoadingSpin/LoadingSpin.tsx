@@ -1,8 +1,8 @@
-import React, { memo } from 'react'
+import React from 'react'
 import { Spin } from 'antd'
 import { LoadingOutlined } from '@ant-design/icons'
-import { useFirstLoadingHook } from '../../hooks/useFirstLoadingHook'
-import { useAnimationTimeoutHook } from '../../hooks/useAnimationTimeoutHook'
+import { useFirstLoadingHook } from '../../../hooks/useFirstLoadingHook'
+import { useAnimationTimeoutHook } from '../../../hooks/useAnimationTimeoutHook'
 import classNames from 'classnames/bind'
 import styles from './LoadingSpin.module.scss'
 
@@ -35,4 +35,4 @@ const LoadingSpin: React.FC<Props> = ({ top, isFixed, isLoading, fontSize = 60, 
     )
 }
 
-export default memo(LoadingSpin)
+export { LoadingSpin }
