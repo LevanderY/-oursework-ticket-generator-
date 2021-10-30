@@ -1,10 +1,10 @@
 import React, { FC } from 'react'
 import { Table } from 'antd'
 import { useSelector } from 'react-redux'
+import NestedTableIcon from '../../../components/NestedTableIcon/NestedTableIcon'
+import { TicketsFilter } from '../TicketsActions'
 import { AppStateInterface } from '../../../state/_store/createRootReducer'
 import { TestBankListInterface } from '../../../state/tests/testsStateSlice'
-import NestedTableIcon from '../../../components/NestedTableIcon/NestedTableIcon'
-import { TicketsFilter } from '../TicketsActions/TicketsFilter'
 
 const { Column } = Table
 

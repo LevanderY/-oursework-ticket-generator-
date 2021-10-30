@@ -1,12 +1,16 @@
 import React, { FC } from 'react'
-import { Row, Col } from 'antd'
-import { Field, Form, Formik } from 'formik'
+import { Row, Col, message } from 'antd'
+import { Field, Form, Formik, FormikHelpers } from 'formik'
 import { Button } from 'antd'
 import * as yup from 'yup'
 import { NumberField, TextField } from '../../../../components'
+import { ticketGenerator } from '../../../../utils/ticketGenerator'
 import { TestsBankInterface } from '../../../../state/tests/testsStateSlice'
+import { auth, firestore } from '../../../../firebase'
+import { useDispatch } from 'react-redux'
+import { loadingTicketsListAction } from '../../../../state/tickets/ticketsStateSlice'
 
-interface TicketsFilterValuesInterface {
+export interface TicketsFilterValuesInterface {
     name: string
     author: string
     numOfOptions: number
@@ -25,20 +29,18 @@ const initialValues: TicketsFilterValuesInterface = {
 }
 
 const TicketsFilter: FC<Props> = ({ testsBank }: Props) => {
-    const onSubmitHandler = async () => {
-        let i = 0
-        let ticketsBank: any[] = []
-        const randomArr = () => Math.random() - 0.5
+    const dispatch = useDispatch()
 
-        while (i < 5) {
-            i++
-            const bank = [...testsBank]
-            bank.sort(randomArr)
-            bank.splice(0, 1)
-            ticketsBank = [...ticketsBank, bank]
+    const onSubmitHandler = async (values: TicketsFilterValuesInterface, { setErrors }: FormikHelpers<TicketsFilterValuesInterface>) => {
+        const value = ticketGenerator(values, testsBank)
+        const data = firestore.collection('root').doc(auth.currentUser?.uid).collection('tickets')
+        try {
+            await data.add(value)
+            dispatch(loadingTicketsListAction())
+        } catch (e: unknown | any) {
+            setErrors(e)
+            message.error(`Ops, ${e}`)
         }
-
-        console.log(ticketsBank)
     }
 
     const validationSchema = yup.object().shape({
@@ -57,16 +59,16 @@ const TicketsFilter: FC<Props> = ({ testsBank }: Props) => {
             <Form autoComplete='off'>
                 <Row gutter={[8, 8]}>
                     <Col span={6}>
-                        <Field type='name' name='name' label='Ticket name' component={TextField} />
+                        <Field name='name' label='Ticket name' component={TextField} />
                     </Col>
                     <Col span={6}>
-                        <Field type='text' name='author' label='Author' component={TextField} />
+                        <Field name='author' label='Author' component={TextField} />
                     </Col>
                     <Col span={6}>
-                        <Field type='text' name='numOfOptions' label='How many variants?' component={NumberField} />
+                        <Field name='numOfOptions' label='How many variants?' component={NumberField} />
                     </Col>
                     <Col span={6}>
-                        <Field type='text' name='maxQuestions' label='How many questions?' component={TextField} />
+                        <Field name='maxQuestions' label='How many questions?' component={TextField} />
                     </Col>
                 </Row>
                 <Button htmlType='submit' ghost>
