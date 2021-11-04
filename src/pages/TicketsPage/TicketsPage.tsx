@@ -2,7 +2,7 @@ import React, { FC, useEffect } from 'react'
 import { Row, Col, Card, Tag } from 'antd'
 import { useDispatch, useSelector } from 'react-redux'
 import { LoadingSpin } from '../../components'
-import { TicketsModalButton } from './TicketsActions'
+import { TicketsDeleteButton, TicketsEditButton, TicketsModalButton } from './TicketsActions'
 import { TicketsPdfRedirect } from './TicketsPdfRedirect'
 import { loadingTicketsListAction, TicketsListInterface } from '../../state/tickets/ticketsStateSlice'
 import { AppStateInterface } from '../../state/_store/createRootReducer'
@@ -30,6 +30,10 @@ const TicketsPage: FC = () => {
                                 style={{ marginTop: 16 }}
                                 loading={isTicketsListLoading}
                                 extra={<TicketsPdfRedirect id={id} title={title} author={author} questionsBank={questionsBank} />}
+                                actions={[
+                                    <TicketsDeleteButton key={'ticketDelete'} id={id} />,
+                                    <TicketsEditButton id={id} fromValues={{ id, title, author, questionsBank }} />,
+                                ]}
                                 key={id}
                             >
                                 <Row gutter={[8, 16]}>
