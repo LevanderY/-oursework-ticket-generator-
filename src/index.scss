@@ -15,6 +15,36 @@ body {
   align-items: center;
 }
 
+.fadeIn {
+  animation: 0.3s fadeIn forwards;
+}
+
+.fadeOut {
+  animation: 0.3s fadeOut forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-20px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0px, 0px);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translate(0px, 0px);
+  }
+  to {
+    transform: translate(-20px, 0);
+    opacity: 0;
+  }
+}
+
 // Antd resets style
 
 //SideBar
@@ -90,4 +120,9 @@ body {
 
 .ant-table-tbody > tr.ant-table-placeholder:hover > td {
   background-color: #30303d !important;
+}
+
+// Nested table
+tr.ant-table-expanded-row > td, tr.ant-table-expanded-row:hover > td {
+  background: #30303d !important;
 }

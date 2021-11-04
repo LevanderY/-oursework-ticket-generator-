@@ -18,7 +18,7 @@ const SideBarNavigation: React.FC = () => {
                 <Link to={'/tests-bank'}>Tests bank</Link>
             </Menu.Item>
             <Menu.Item key='3' icon={<BookOutlined />}>
-                Generated tickets
+                <Link to={'/tickets'}>Generated tickets</Link>
             </Menu.Item>
             <Menu.Item key='4' icon={<BookOutlined />}>
                 <Link to={'/profile'}>Profile</Link>
