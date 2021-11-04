@@ -1,5 +1,6 @@
 import { all } from 'redux-saga/effects'
 import testBankRootSaga from '../tests/testsSaga'
+import ticketsListRootSaga from '../tickets/tiketsSaga'
 
 export interface ResponseGenerator {
     config?: any
@@ -12,5 +13,5 @@ export interface ResponseGenerator {
 }
 
 export default function* rootSaga() {
-    yield all([testBankRootSaga()])
+    yield all([testBankRootSaga(), ticketsListRootSaga()])
 }

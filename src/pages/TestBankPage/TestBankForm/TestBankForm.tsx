@@ -4,8 +4,8 @@ import { useDispatch } from 'react-redux'
 import { Button, Divider, message } from 'antd'
 import * as yup from 'yup'
 import { TextField } from '../../../components'
-import { loadingListTestsAction, TestsBankInterface } from '../../../state/tests/testsStateSlice'
 import { firestore, auth } from '../../../firebase'
+import { loadingListTestsAction, TestsBankInterface } from '../../../state/tests/testsStateSlice'
 
 interface TestBankFormInterface {
     name: string

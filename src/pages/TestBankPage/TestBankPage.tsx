@@ -31,7 +31,6 @@ const TestBankPage: React.FC = () => {
                                     <TestBankDeleteButton key={'delete'} id={id} />,
                                     <TestsListRedirectLink key={'redirectLink'} id={id} name={name} description={description} testsBank={testsBank} />,
                                 ]}
-                                // extra={<TestsAddIconButton key={'add-test'} id={id} name={name} description={description} testsBank={testsBank} />}
                                 title={name}
                                 style={{ marginTop: 16 }}
                                 loading={isTestBankLoading}
