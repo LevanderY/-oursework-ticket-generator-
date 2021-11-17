@@ -19,6 +19,7 @@ export interface TicketsFilterValuesInterface {
 
 interface Props {
     testsBank: TestsBankInterface[]
+    onCloseHandler: () => void
 }
 
 const initialValues: TicketsFilterValuesInterface = {
@@ -28,7 +29,7 @@ const initialValues: TicketsFilterValuesInterface = {
     maxQuestions: 0,
 }
 
-const TicketsFilter: FC<Props> = ({ testsBank }: Props) => {
+const TicketsFilter: FC<Props> = ({ testsBank, onCloseHandler }: Props) => {
     const dispatch = useDispatch()
 
     const onSubmitHandler = async (values: TicketsFilterValuesInterface, { setErrors }: FormikHelpers<TicketsFilterValuesInterface>) => {
@@ -37,6 +38,7 @@ const TicketsFilter: FC<Props> = ({ testsBank }: Props) => {
         try {
             await data.add(value)
             dispatch(loadingTicketsListAction())
+            onCloseHandler()
         } catch (e: unknown | any) {
             setErrors(e)
             message.error(`Ops, ${e}`)
@@ -59,20 +61,20 @@ const TicketsFilter: FC<Props> = ({ testsBank }: Props) => {
             <Form autoComplete='off'>
                 <Row gutter={[8, 8]}>
                     <Col span={6}>
-                        <Field name='name' label='Ticket name' component={TextField} />
+                        <Field name='name' label='Назва білету' component={TextField} />
                     </Col>
                     <Col span={6}>
-                        <Field name='author' label='Author' component={TextField} />
+                        <Field name='author' label='Автор' component={TextField} />
                     </Col>
                     <Col span={6}>
-                        <Field name='numOfOptions' label='How many variants?' component={NumberField} />
+                        <Field name='numOfOptions' label='Кількість варіантів' component={NumberField} />
                     </Col>
                     <Col span={6}>
-                        <Field name='maxQuestions' label='How many questions?' component={TextField} />
+                        <Field name='maxQuestions' label='Кількість питань?' component={TextField} />
                     </Col>
                 </Row>
                 <Button htmlType='submit' ghost>
-                    Create tickets
+                    Згенерувати білет
                 </Button>
             </Form>
         </Formik>

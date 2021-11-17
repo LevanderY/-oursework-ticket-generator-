@@ -29,13 +29,13 @@ const SideBarNavigation: React.FC = () => {
                 </Col>
             </Row>
             <Menu.Item key='1' icon={<AppstoreOutlined />}>
-                <Link to={'/'}>Get Stared</Link>
+                <Link to={'/'}>Головна сторінка</Link>
             </Menu.Item>
             <Menu.Item key='2' icon={<BankOutlined />}>
-                <Link to={'/tests-bank'}>Tests bank</Link>
+                <Link to={'/tests-bank'}>Тестові банки</Link>
             </Menu.Item>
             <Menu.Item key='3' icon={<BookOutlined />}>
-                <Link to={'/tickets'}>Generated tickets</Link>
+                <Link to={'/tickets'}>Генерування білетів</Link>
             </Menu.Item>
         </Menu>
     )

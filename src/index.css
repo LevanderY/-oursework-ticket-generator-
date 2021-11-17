@@ -4,9 +4,8 @@ body {
 
 .container {
   width: 100%;
-  max-width: 1270px;
-  padding: 0 10px;
-  margin: 10px auto;
+  max-width: 1171px;
+  margin: 0 auto;
 }
 
 .centered {
@@ -15,34 +14,10 @@ body {
   align-items: center;
 }
 
-.fadeIn {
-  animation: 0.3s fadeIn forwards;
+.top {
+  margin-top: 10px;
 }
 
-.fadeOut {
-  animation: 0.3s fadeOut forwards;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translate(-20px, 0);
-  }
-  to {
-    opacity: 1;
-    transform: translate(0px, 0px);
-  }
-}
-@keyframes fadeOut {
-  from {
-    opacity: 1;
-    transform: translate(0px, 0px);
-  }
-  to {
-    transform: translate(-20px, 0);
-    opacity: 0;
-  }
-}
 .ant-menu-vertical .ant-menu-item, .ant-menu-vertical-left .ant-menu-item, .ant-menu-vertical-right .ant-menu-item, .ant-menu-inline .ant-menu-item, .ant-menu-vertical .ant-menu-submenu-title, .ant-menu-vertical-left .ant-menu-submenu-title, .ant-menu-vertical-right .ant-menu-submenu-title, .ant-menu-inline .ant-menu-submenu-title {
   margin-top: 0 !important;
   margin-bottom: 0 !important;

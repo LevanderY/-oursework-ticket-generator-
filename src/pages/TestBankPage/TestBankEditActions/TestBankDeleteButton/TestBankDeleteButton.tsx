@@ -15,13 +15,13 @@ const TestBankDeleteButton: FC<Props> = ({ id }: Props) => {
         try {
             await firestore.collection('root').doc(auth.currentUser?.uid).collection('test-banks').doc(id).delete()
             dispatch(loadingListTestsAction())
-            message.success('Test bank has been deleted!')
+            message.success('Тестовий банк видалений!')
         } catch (e: any | unknown) {
             message.error(e)
         }
     }
     return (
-        <Popover title={'Delete Test bank?'} trigger='hover'>
+        <Popover title={'Видалити?'} trigger='hover'>
             <DeleteTwoTone twoToneColor={'#fff'} onClick={onDeleteTestBankHandler} />
         </Popover>
     )

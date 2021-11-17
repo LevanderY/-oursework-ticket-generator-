@@ -4,13 +4,17 @@ import { Header } from '../Header'
 import { SideBarNavigation } from '../SideBarNavigation'
 
 const NavigationBar: React.FC = ({ children }) => (
-    <Row>
+    <Row wrap={false}>
         <Col>
             <SideBarNavigation />
         </Col>
         <Col flex='auto'>
-            <Header />
-            <div className='container'>{children}</div>
+            <Row>
+                <Col span={'24'}>
+                    <Header />
+                </Col>
+                <Col span={'24'}>{children}</Col>
+            </Row>
         </Col>
     </Row>
 )

@@ -8,8 +8,7 @@ interface TicketsListFormInterface {
     questionsBank: QuestionsBankInterface[]
 }
 
-export const ticketGenerator = (values: TicketsFilterValuesInterface, testsBank: TestsBankInterface[]) => {
-    const { maxQuestions, name, numOfOptions, author } = values
+export const ticketGenerator = ({ maxQuestions, name, numOfOptions, author }: TicketsFilterValuesInterface, testsBank: TestsBankInterface[]) => {
     const randomArr = () => Math.random() - 0.5
 
     const ticketsBank: TicketsListFormInterface[] = [

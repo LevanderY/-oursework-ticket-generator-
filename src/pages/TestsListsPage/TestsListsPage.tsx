@@ -40,15 +40,15 @@ const TestsListPage: FC = () => {
     }, [testBankList])
 
     return (
-        <>
+        <div className={'container'}>
             {<LoadingSpin isLoading={isTestBankLoading} top={150} isHaveFirstLoading={isHaveFirstLoading} />}
             {isHaveFirstLoading && (
                 <>
                     <TestsAddIconButton formValues={{ testsBank, id, name, description }} />
                     <Table style={{ marginTop: '16px' }} dataSource={testsBank} size='small' pagination={false} loading={isTestBankLoading}>
-                        <Column title={'Test title'} dataIndex={'test'} key={'testTitle'} />
+                        <Column title={'Назва'} dataIndex={'test'} key={'testTitle'} />
                         <Column
-                            title={'Actions'}
+                            title={'Дії'}
                             key={'Actions'}
                             render={(item: TestsBankInterface) => (
                                 <TestsActions key={name} currentTestBankId={item.id} formValues={{ testsBank, id, name, description }} />
@@ -57,7 +57,7 @@ const TestsListPage: FC = () => {
                     </Table>
                 </>
             )}
-        </>
+        </div>
     )
 }
 

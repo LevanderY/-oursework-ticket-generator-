@@ -8,7 +8,11 @@ import { TestBankListInterface } from '../../../state/tests/testsStateSlice'
 
 const { Column } = Table
 
-const TestsBankTable: FC = () => {
+interface Props {
+    onCloseHandler: () => void
+}
+
+const TestsBankTable: FC<Props> = ({ onCloseHandler }: Props) => {
     const { testBankList, isTestBankLoading } = useSelector((state: AppStateInterface) => state.tests)
 
     return (
@@ -21,14 +25,14 @@ const TestsBankTable: FC = () => {
                 loading={isTestBankLoading}
                 rowKey={({ id }: TestBankListInterface) => id}
                 expandable={{
-                    expandedRowRender: ({ testsBank }: TestBankListInterface) => <TicketsFilter testsBank={testsBank} />,
+                    expandedRowRender: ({ testsBank }: TestBankListInterface) => <TicketsFilter onCloseHandler={onCloseHandler} testsBank={testsBank} />,
                     expandIcon: ({ expanded, onExpand, record }) => (
                         <NestedTableIcon title={'Create'} expanded={expanded} onExpand={onExpand} record={record} />
                     ),
                 }}
             >
-                <Column title={'Bank name'} dataIndex={'name'} key={'name'} />
-                <Column title={'Bank description'} dataIndex={'description'} key={'description'} />
+                <Column title={'Назва банку'} dataIndex={'name'} key={'name'} />
+                <Column title={'Опис банку'} dataIndex={'description'} key={'description'} />
             </Table>
         </div>
     )
