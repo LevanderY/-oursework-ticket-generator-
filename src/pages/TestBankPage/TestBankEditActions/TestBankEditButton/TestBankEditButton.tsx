@@ -17,7 +17,7 @@ const TestBankEditButton: FC<Props> = ({ id, formValues }: Props) => {
         <>
             <EditTwoTone twoToneColor='#fff' onClick={onOpenHandler} />
             <Modal onCancel={onCloseHandler} onOk={onOpenHandler} visible={isVisible} centered footer={null}>
-                <TestBankForm id={id} title={'Edit test bank'} onCloseHandler={onCloseHandler} formValues={formValues} />
+                <TestBankForm id={id} title={'Edit bank'} onCloseHandler={onCloseHandler} formValues={formValues} />
             </Modal>
         </>
     )

@@ -19,7 +19,7 @@ const Header: React.FC = () => {
             await auth.signOut()
             dispatch(logoutAuthAction())
             history.push('/login')
-            message.success('Logout successful!')
+            message.success('Success logout!')
         } catch {
             message.error(`Failed to logout`)
         }
@@ -28,8 +28,8 @@ const Header: React.FC = () => {
     return (
         <PageHeader
             className={cx('header')}
-            title={<span className={cx('title')}>Tests generator</span>}
-            subTitle={<span className={cx('subtitle')}>by Yuriy Leshchyshyn</span>}
+            title={<span className={cx('title')}>Tickets generator</span>}
+            subTitle={<span className={cx('subtitle')}>by Levander</span>}
             extra={[
                 <Button onClick={onLogOutHandler} key={'1'} ghost icon={<ExportOutlined />}>
                     Exit

@@ -51,7 +51,7 @@ const TicketsEditForm: FC<Props> = ({ id, fromValues, onCloseHandler }: Props) =
         <Formik initialValues={initialValues} onSubmit={onSubmitHandler} validationSchema={validationSchema}>
             <Form autoComplete='off'>
                 <Divider key={id}>{title}</Divider>
-                <Field type='name' name='title' label='Title' component={TextField} />
+                <Field type='name' name='title' label='Name' component={TextField} />
                 <Field type='text' name='author' label='Author' component={TextField} />
                 <Button htmlType='submit' ghost>
                     Edit ticket

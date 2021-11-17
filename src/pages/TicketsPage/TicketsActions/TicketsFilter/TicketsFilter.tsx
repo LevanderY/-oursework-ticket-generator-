@@ -19,6 +19,7 @@ export interface TicketsFilterValuesInterface {
 
 interface Props {
     testsBank: TestsBankInterface[]
+    onCloseHandler: () => void
 }
 
 const initialValues: TicketsFilterValuesInterface = {
@@ -28,7 +29,7 @@ const initialValues: TicketsFilterValuesInterface = {
     maxQuestions: 0,
 }
 
-const TicketsFilter: FC<Props> = ({ testsBank }: Props) => {
+const TicketsFilter: FC<Props> = ({ testsBank, onCloseHandler }: Props) => {
     const dispatch = useDispatch()
 
     const onSubmitHandler = async (values: TicketsFilterValuesInterface, { setErrors }: FormikHelpers<TicketsFilterValuesInterface>) => {
@@ -37,6 +38,7 @@ const TicketsFilter: FC<Props> = ({ testsBank }: Props) => {
         try {
             await data.add(value)
             dispatch(loadingTicketsListAction())
+            onCloseHandler()
         } catch (e: unknown | any) {
             setErrors(e)
             message.error(`Ops, ${e}`)
@@ -65,14 +67,14 @@ const TicketsFilter: FC<Props> = ({ testsBank }: Props) => {
                         <Field name='author' label='Author' component={TextField} />
                     </Col>
                     <Col span={6}>
-                        <Field name='numOfOptions' label='How many variants?' component={NumberField} />
+                        <Field name='numOfOptions' label='Number of options ?' component={NumberField} />
                     </Col>
                     <Col span={6}>
-                        <Field name='maxQuestions' label='How many questions?' component={TextField} />
+                        <Field name='maxQuestions' label='Number of questions?' component={TextField} />
                     </Col>
                 </Row>
                 <Button htmlType='submit' ghost>
-                    Create tickets
+                    Generate ticket
                 </Button>
             </Form>
         </Formik>
