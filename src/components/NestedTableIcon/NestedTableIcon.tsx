@@ -1,5 +1,4 @@
 import React from 'react'
-import { Tooltip } from 'antd'
 import { DownOutlined, UpOutlined } from '@ant-design/icons'
 
 interface Props<T> {
@@ -9,7 +8,7 @@ interface Props<T> {
     record: T
 }
 
-const NestedTableIcon = <T,>({ expanded, onExpand, record, title }: Props<T>): JSX.Element => (
+const NestedTableIcon = <T,>({ expanded, onExpand, record }: Props<T>): JSX.Element => (
     <>
         {expanded ? (
             <DownOutlined onClick={(e: React.MouseEvent<HTMLSpanElement>) => onExpand(record, e)} />

@@ -12,7 +12,7 @@ const TestsEditIconButton: FC<Props> = ({ currentTestBankId, formValues }: Props
 
     return (
         <>
-            <Popover title={'Edit test!'} trigger='hover'>
+            <Popover title={'Редагувати тест!'} trigger='hover'>
                 <EditTwoTone twoToneColor='#fff' onClick={onOpenHandler} />
             </Popover>
             <Modal onCancel={onCloseHandler} onOk={onOpenHandler} visible={isVisible} centered footer={null}>

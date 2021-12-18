@@ -7,14 +7,14 @@ const TestBankAddButton: React.FC = () => {
     const { isVisible, onOpenHandler, onCloseHandler } = useVisibleModal()
 
     return (
-        <>
+        <div className={'top'}>
             <Button ghost onClick={onOpenHandler}>
                 Create test bank
             </Button>
             <Modal visible={isVisible} onCancel={onCloseHandler} centered mask footer={null}>
-                <TestBankForm title={'Create test bank'} onCloseHandler={onCloseHandler} />
+                <TestBankForm title={'Create'} onCloseHandler={onCloseHandler} />
             </Modal>
-        </>
+        </div>
     )
 }
 

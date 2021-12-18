@@ -18,7 +18,7 @@ const TestBankPage: React.FC = () => {
     }, [dispatch])
 
     return (
-        <>
+        <div className={'container'}>
             <TestBankAddButton />
             {<LoadingSpin isLoading={isTestBankLoading} top={150} isHaveFirstLoading={isHaveFirstLoading} />}
             {isHaveFirstLoading && (
@@ -42,7 +42,7 @@ const TestBankPage: React.FC = () => {
                     ))}
                 </Row>
             )}
-        </>
+        </div>
     )
 }
 

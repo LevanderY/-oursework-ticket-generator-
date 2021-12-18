@@ -31,7 +31,7 @@ const TestsDeleteIconButton: FC<Props> = ({ formValues: { id, name, description,
     }
 
     return (
-        <Popover title={'Delete test?'} trigger='hover'>
+        <Popover title={'Видалити тест?'} trigger='hover'>
             <DeleteOutlined onClick={onDeleteTestHandler(id, values)} />
         </Popover>
     )

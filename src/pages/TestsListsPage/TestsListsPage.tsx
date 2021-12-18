@@ -1,10 +1,10 @@
 import React, { FC, useEffect, useCallback, useState } from 'react'
-import { Table } from 'antd'
+import { Table, Space } from 'antd'
 import { useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { createBrowserHistory } from 'history'
 import { LoadingSpin } from '../../components'
-import { TestsActions, TestsAddIconButton } from '../TestBankPage'
+import { TestsActions, TestsAddIconButton, TestGroupAddButton } from './TestsActions'
 import { AppStateInterface } from '../../state/_store/createRootReducer'
 import { loadingListTestsAction, TestBankListInterface, TestsBankInterface } from '../../state/tests/testsStateSlice'
 
@@ -40,13 +40,22 @@ const TestsListPage: FC = () => {
     }, [testBankList])
 
     return (
-        <>
+        <div className={'container'}>
             {<LoadingSpin isLoading={isTestBankLoading} top={150} isHaveFirstLoading={isHaveFirstLoading} />}
             {isHaveFirstLoading && (
                 <>
-                    <TestsAddIconButton formValues={{ testsBank, id, name, description }} />
-                    <Table style={{ marginTop: '16px' }} dataSource={testsBank} size='small' pagination={false} loading={isTestBankLoading}>
-                        <Column title={'Test title'} dataIndex={'test'} key={'testTitle'} />
+                    <Space size={'large'}>
+                        <TestsAddIconButton formValues={{ testsBank, id, name, description }} />
+                        <TestGroupAddButton />
+                    </Space>
+                    <Table
+                        style={{ marginTop: '16px' }}
+                        dataSource={testsBank}
+                        size='small'
+                        pagination={{ position: ['bottomCenter'] }}
+                        loading={isTestBankLoading}
+                    >
+                        <Column title={'Name'} dataIndex={'test'} key={'testTitle'} />
                         <Column
                             title={'Actions'}
                             key={'Actions'}
@@ -57,7 +66,7 @@ const TestsListPage: FC = () => {
                     </Table>
                 </>
             )}
-        </>
+        </div>
     )
 }
 

@@ -4,9 +4,8 @@ body {
 
 .container {
   width: 100%;
-  max-width: 1270px;
-  padding: 0 10px;
-  margin: 10px auto;
+  max-width: 1171px;
+  margin: 0 auto;
 }
 
 .centered {
@@ -15,34 +14,10 @@ body {
   align-items: center;
 }
 
-.fadeIn {
-  animation: 0.3s fadeIn forwards;
+.top {
+  margin-top: 10px;
 }
 
-.fadeOut {
-  animation: 0.3s fadeOut forwards;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translate(-20px, 0);
-  }
-  to {
-    opacity: 1;
-    transform: translate(0px, 0px);
-  }
-}
-@keyframes fadeOut {
-  from {
-    opacity: 1;
-    transform: translate(0px, 0px);
-  }
-  to {
-    transform: translate(-20px, 0);
-    opacity: 0;
-  }
-}
 .ant-menu-vertical .ant-menu-item, .ant-menu-vertical-left .ant-menu-item, .ant-menu-vertical-right .ant-menu-item, .ant-menu-inline .ant-menu-item, .ant-menu-vertical .ant-menu-submenu-title, .ant-menu-vertical-left .ant-menu-submenu-title, .ant-menu-vertical-right .ant-menu-submenu-title, .ant-menu-inline .ant-menu-submenu-title {
   margin-top: 0 !important;
   margin-bottom: 0 !important;
@@ -115,6 +90,42 @@ body {
 
 tr.ant-table-expanded-row > td, tr.ant-table-expanded-row:hover > td {
   background: #30303d !important;
+}
+
+.ant-pagination-item-active {
+  background: #30303d !important;
+}
+
+.ant-pagination-item-active a {
+  color: grey !important;
+}
+
+.ant-pagination-item-active {
+  border-color: grey !important;
+}
+
+.ant-pagination-item-active:focus-visible a, .ant-pagination-item-active:hover a,
+.ant-pagination-item:focus-visible a, .ant-pagination-item:hover a,
+.ant-pagination-prev:focus-visible .ant-pagination-item-link,
+.ant-pagination-next:focus-visible .ant-pagination-item-link,
+.ant-pagination-prev:hover .ant-pagination-item-link,
+.ant-pagination-next:hover .ant-pagination-item-link {
+  color: #fff !important;
+  transition: 0.4s;
+}
+
+.ant-pagination-item-active:focus-visible, .ant-pagination-item-active:hover {
+  border-color: #fff !important;
+  transition: 0.4s;
+}
+
+.ant-popover-inner {
+  background: #30303d !important;
+}
+
+.ant-popover-title {
+  color: rgba(255, 255, 255, 0.85) !important;
+  border-bottom: none !important;
 }
 
 /*# sourceMappingURL=index.css.map */

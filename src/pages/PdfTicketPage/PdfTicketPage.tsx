@@ -57,13 +57,13 @@ const PdfTicketPage: FC = () => {
                     {questionsBank.map(({ variant, testBank }: QuestionsBankInterface) => (
                         <Page size={'A4'}>
                             <Text style={styles.title}>{title}</Text>
-                            <Text style={styles.subtitle}>Варіант: {variant}</Text>
+                            <Text style={styles.subtitle}>Variant: {variant}</Text>
                             {testBank.map(({ test }: TestsBankInterface, i: number) => (
                                 <Text key={test} style={styles.text}>
                                     {`${i + 1}) ${test}`}
                                 </Text>
                             ))}
-                            <Text style={styles.author}>{`Викладач: ${author}`}</Text>
+                            <Text style={styles.author}>{`Teacher : ${author}`}</Text>
                         </Page>
                     ))}
                 </Document>

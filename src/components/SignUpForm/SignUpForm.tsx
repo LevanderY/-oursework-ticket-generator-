@@ -1,7 +1,7 @@
 import React from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory, Link } from 'react-router-dom'
 import * as yup from 'yup'
-import { Button, message } from 'antd'
+import { Button, message, Divider } from 'antd'
 import { Field, Form, Formik, FormikHelpers } from 'formik'
 import { TextField } from '../index'
 import { auth } from '../../firebase'
@@ -26,16 +26,16 @@ const SignUpForm: React.FC = () => {
     }
 
     const validationSchema = yup.object().shape({
-        email: yup.string().email().required('Required field').min(2, 'Too Short!').max(40, 'Too Long!'),
+        email: yup.string().email().required('Email is required!').min(2, 'Too Short!').max(30, 'To long!'),
         password: yup
             .string()
-            .required('Required field')
-            .min(6, 'Password is too short - should be 6 chars minimum.')
-            .matches(/[a-zA-Z]/, 'Password must contain Latin letters!'),
+            .required('Password is required')
+            .min(6, 'Password too short')
+            .matches(/[a-zA-Z]/, 'Password must contain a numbers'),
         confirmPassWord: yup
             .string()
             .oneOf([yup.ref('password'), null], 'Passwords must match')
-            .required('Required field'),
+            .required('Required'),
     })
 
     const onSubmitHandler = async (values: SignUpIValuesInterface, { setErrors }: FormikHelpers<SignUpIValuesInterface>) => {
@@ -53,11 +53,15 @@ const SignUpForm: React.FC = () => {
     return (
         <Formik initialValues={initialValues} onSubmit={onSubmitHandler} validationSchema={validationSchema}>
             <Form autoComplete='off' className={cx('form-container')}>
+                <Divider>Registration</Divider>
                 <Field type='email' name='email' label='Email' component={TextField} />
-                <Field type='password' name='password' label='Enter password' component={TextField} />
+                <Field type='password' name='password' label='Password' component={TextField} />
                 <Field type='password' name='confirmPassWord' label='Confirm password' component={TextField} />
+                <p style={{ color: '#fff' }}>
+                    Already have account? <Link to={'/sing-in'}>Sign in</Link>
+                </p>
                 <Button htmlType='submit' type='primary'>
-                    SignUp
+                    Registration
                 </Button>
             </Form>
         </Formik>

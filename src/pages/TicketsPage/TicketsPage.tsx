@@ -18,7 +18,7 @@ const TicketsPage: FC = () => {
     }, [dispatch])
 
     return (
-        <>
+        <div className={'container'}>
             <TicketsModalButton />
             {<LoadingSpin isLoading={isTicketsListLoading} top={150} isHaveFirstLoading={isHaveFirstLoading} />}
             {isHaveFirstLoading && (
@@ -38,13 +38,13 @@ const TicketsPage: FC = () => {
                             >
                                 <Row gutter={[8, 16]}>
                                     <Col span={12}>
-                                        <Meta description={<Tag color='#23232e'>Author:</Tag>} />
+                                        <Meta description={<Tag color='#23232e'>Author :</Tag>} />
                                     </Col>
                                     <Col span={12}>
                                         <Meta description={author} />
                                     </Col>
                                     <Col span={12}>
-                                        <Meta description={<Tag color='#23232e'>Variants:</Tag>} />
+                                        <Meta description={<Tag color='#23232e'>Variants :</Tag>} />
                                     </Col>
                                     <Col span={12}>
                                         <Meta description={questionsBank.length} />
@@ -55,7 +55,7 @@ const TicketsPage: FC = () => {
                     ))}
                 </Row>
             )}
-        </>
+        </div>
     )
 }
 
