@@ -31,8 +31,8 @@ const TestsBankTable: FC<Props> = ({ onCloseHandler }: Props) => {
                     ),
                 }}
             >
-                <Column title={'Bank name'} dataIndex={'name'} key={'name'} />
-                <Column title={'Bank description'} dataIndex={'description'} key={'description'} />
+                <Column title={'Назва банку'} dataIndex={'name'} key={'name'} />
+                <Column title={'Опис банку'} dataIndex={'description'} key={'description'} />
             </Table>
         </div>
     )

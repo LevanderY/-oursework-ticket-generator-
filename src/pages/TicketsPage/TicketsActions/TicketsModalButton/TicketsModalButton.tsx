@@ -10,7 +10,7 @@ const TicketsModalButton: FC = () => {
     return (
         <div className={'top'}>
             <Button ghost onClick={onOpenHandler}>
-                Create ticket <BankTwoTone twoToneColor={'#fff'} />
+                Створити білет <BankTwoTone twoToneColor={'#fff'} />
             </Button>
 
             <Modal visible={isVisible} onCancel={onCloseHandler} width={1000} centered mask footer={null}>
